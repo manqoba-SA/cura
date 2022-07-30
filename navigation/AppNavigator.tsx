@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeNavigator from "./HomeNavigator";
 import MedicineReminderNavigator from "./MedicineReminderNavigator";
-import HealthLibraryNavigator from "./healthLibraryNavigator";
+import HealthLibraryNavigator from "./HealthLibraryNavigator";
 import ShopNavigator from "./ShopNavigator";
 
 interface TabBarIconProps {
