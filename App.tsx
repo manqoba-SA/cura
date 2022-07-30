@@ -4,15 +4,20 @@ import { StatusBar } from "expo-status-bar";
 import SlidesScreen from "./screens/SlidesScreen";
 // import React from 'react';
 import { Dimensions, StyleSheet } from "react-native";
+import { useState } from "react";
+import AppNavigator from "./navigation/AppNavigator";
+import AuthNavigator from "./navigation/AuthNavigator";
+import navigationTheme from "./navigation/navigationTheme";
+// import AuthNavigator from "./navigation/AuthNavigator";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const { width, height } = Dimensions.get("window");
+  const [user, setUser] = useState("manqoba");
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="SlidesScreen" component={SlidesScreen} />
-      </Stack.Navigator>
+    <NavigationContainer theme={navigationTheme}>
+      {/* <Stack.Navigator screenOptions={{ headerShown: false }}> */}
+      {user ? <AppNavigator /> : <AuthNavigator />}
+      {/* </Stack.Navigator> */}
     </NavigationContainer>
   );
 }

@@ -92,7 +92,10 @@ export default function SlidesScreen({ navigation }) {
         <View style={{ marginBottom: 20 }}>
           {currentSlider == slides.length - 1 ? (
             <View style={{ height: 100 }}>
-              <TouchableOpacity style={styles.btn}>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => navigation.navigate("Register")}
+              >
                 <Text
                   style={{ color: "#fff", fontWeight: "bold", fontSize: 15 }}
                 >
@@ -109,6 +112,7 @@ export default function SlidesScreen({ navigation }) {
                     backgroundColor: "transparent",
                   },
                 ]}
+                onPress={() => navigation.navigate("Login")}
               >
                 <Text
                   style={{
@@ -193,14 +197,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   title: {
-    color: COLORS.white,
     fontSize: 32,
     fontWeight: "bold",
     marginTop: 0,
     color: COLORS.primary,
   },
   subtitle: {
-    color: COLORS.white,
     fontSize: 15,
     marginTop: 0,
     color: "grey",
