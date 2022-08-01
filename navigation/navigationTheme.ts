@@ -6,6 +6,7 @@ export default {
   colors: {
     ...DefaultTheme.colors,
     primary: COLORS.primary.text,
-    background: COLORS.light.background,
+    background: "#A1A3AB",
   },
+  // FontFace: "Poppins_400Regular",
 };

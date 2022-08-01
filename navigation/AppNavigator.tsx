@@ -15,7 +15,12 @@ const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarLabelStyle: { fontFamily: "Poppins_400Regular" },
+      }}
+    >
       <Tab.Screen
         component={HomeNavigator}
         name="Home"
