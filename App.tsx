@@ -22,9 +22,7 @@ export default function App() {
   } else {
     return (
       <NavigationContainer theme={navigationTheme}>
-        {/* <Stack.Navigator screenOptions={{ headerShown: false }}> */}
         {user ? <AppNavigator /> : <AuthNavigator />}
-        {/* </Stack.Navigator> */}
       </NavigationContainer>
     );
   }
