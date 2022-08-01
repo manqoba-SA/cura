@@ -5,6 +5,7 @@ import HomeNavigator from "./HomeNavigator";
 import MedicineReminderNavigator from "./MedicineReminderNavigator";
 import HealthLibraryNavigator from "./HealthLibraryNavigator";
 import ShopNavigator from "./ShopNavigator";
+import { AntDesign } from "@expo/vector-icons";
 
 interface TabBarIconProps {
   color: string;
@@ -26,11 +27,7 @@ export default function AppNavigator() {
         name="Home"
         options={{
           tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <MaterialCommunityIcons
-              color={color}
-              name="home-outline"
-              size={size}
-            />
+            <AntDesign color={color} name="home" size={size} />
           ),
         }}
       />
