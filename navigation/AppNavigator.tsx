@@ -6,6 +6,8 @@ import MedicineReminderNavigator from "./MedicineReminderNavigator";
 import HealthLibraryNavigator from "./HealthLibraryNavigator";
 import ShopNavigator from "./ShopNavigator";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 interface TabBarIconProps {
   color: string;
@@ -36,11 +38,7 @@ export default function AppNavigator() {
         name="Reminder"
         options={{
           tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <MaterialCommunityIcons
-              color={color}
-              name="calendar-clock-outline"
-              size={size}
-            />
+            <Ionicons name="alarm-outline" size={size} color={color} />
           ),
         }}
       />
@@ -49,11 +47,7 @@ export default function AppNavigator() {
         name="Library"
         options={{
           tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <MaterialCommunityIcons
-              color={color}
-              name="book-education-outline"
-              size={size}
-            />
+            <Ionicons name="md-library-outline" size={size} color={color} />
           ),
         }}
       />
@@ -62,11 +56,7 @@ export default function AppNavigator() {
         name="Shop"
         options={{
           tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <MaterialCommunityIcons
-              color={color}
-              name="shopping-outline"
-              size={size}
-            />
+            <Feather name="shopping-bag" size={size} color={color} />
           ),
         }}
       />
