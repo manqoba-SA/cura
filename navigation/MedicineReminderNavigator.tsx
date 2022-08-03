@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import CustomHeader from "../components/CustomHeader/CustomHeader";
 import Home from "../screens/homeScreens.jsx/Home";
 import MedicineReminderScreen from "../screens/medicineReminder/MedicineReminderScreen";
 
@@ -10,6 +11,16 @@ export default function MedicineReminderNavigator() {
       <Stack.Screen
         component={MedicineReminderScreen}
         name="medineReminderScreen"
+        options={{
+          headerShown: true,
+          header: (props) => (
+            <CustomHeader
+              navigation={""}
+              title={"Medicine Reminder"}
+              {...props}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );

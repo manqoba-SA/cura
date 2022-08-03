@@ -11,13 +11,12 @@ import { Icon } from "@iconify/react";
 import settingsIcon from "@iconify/icons-arcticons/settings";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function CustomHeader({ navigation }) {
+export default function CustomHeader({ navigation, title, type = "default" }) {
   const { width, height } = Dimensions.get("window");
   return (
     <View>
       <View
         style={{
-          // marginTop: 30,
           flexDirection: "row",
           margin: 0,
           backgroundColor: "#fff",
@@ -40,7 +39,7 @@ export default function CustomHeader({ navigation }) {
               fontFamily: "Poppins_600SemiBold",
             }}
           >
-            Hi, Oratile
+            {title}
           </Text>
         </View>
         <View
@@ -49,9 +48,13 @@ export default function CustomHeader({ navigation }) {
             marginTop: Platform.OS === "ios" ? 0 : 20,
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("settings")}>
-            <Ionicons name="settings-outline" size={35} color="#A1A3AB" />
-          </TouchableOpacity>
+          {type === "library" ? (
+            <Text>{""}</Text>
+          ) : (
+            <TouchableOpacity onPress={() => navigation.navigate("settings")}>
+              <Ionicons name="settings-outline" size={35} color="#A1A3AB" />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>

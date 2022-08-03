@@ -18,10 +18,19 @@ export default function Home({ navigation }) {
         <CustomBox
           title={"Diagnose"}
           subtitle="Hi Oratile, I can help you learn more about your sysmptoms"
+          onPress={() => navigation.navigate("diagnosis")}
         />
         <View style={{ flexDirection: "row", width: width * 0.8, margin: 0 }}>
-          <CustomBox title={"Health\nLibrary"} type="half" />
-          <CustomBox title={"Medicine Reminder"} type="half" />
+          <CustomBox
+            title={"Health\nLibrary"}
+            type="half"
+            onPress={() => navigation.navigate("healthLibrary")}
+          />
+          <CustomBox
+            title={"Medicine\nReminder"}
+            type="half"
+            onPress={() => navigation.navigate("medineReminderScreen")}
+          />
         </View>
         <View style={{ margin: 20 }}>
           <Text style={{ fontFamily: "Poppins_400Regular", fontSize: 20 }}>
@@ -31,6 +40,7 @@ export default function Home({ navigation }) {
             title={"Sleep meditation"}
             subtitle="Heaalth is very important in life because when health is a alive.."
             type="medium"
+            onPress={() => navigation.navigate("diagnosis")}
           />
         </View>
       </View>

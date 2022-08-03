@@ -1,10 +1,20 @@
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import COLORS from "../../constants/COLORS";
 
-export default function CustomBox({ title, subtitle, type = "full" }) {
+export default function CustomBox({ title, subtitle, type = "full", onPress }) {
   return (
-    <View style={[styles.box, styles[`${type}_box`]]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.box, styles[`${type}_box`]]}
+    >
       {type === "medium" ? (
         <View style={{ flex: 1.0, marginTop: 20 }}>
           <Text style={[styles.boxTitle, styles[`${type}_boxTitle`]]}>
@@ -30,7 +40,7 @@ export default function CustomBox({ title, subtitle, type = "full" }) {
           )}
         </>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 const { width, height } = Dimensions.get("window");
@@ -38,9 +48,13 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: "#fff",
     height: height * 0.21,
-    borderRadius: 16,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   full_box: {
     flexDirection: "row",
@@ -51,7 +65,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   medium_box: {
-    backgroundColor: COLORS.primary.text,
+    backgroundColor: COLORS.light.background,
     width: "80%",
     marginTop: 12,
   },
@@ -70,14 +84,8 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_600SemiBold",
     fontSize: 20,
   },
-  medium_boxTitle: {
-    color: "#000",
-  },
   boxSubTitle: {
     fontFamily: "Poppins_400Regular",
     color: "grey",
-  },
-  medium_boxSubTitle: {
-    color: "#000",
   },
 });
