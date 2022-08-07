@@ -99,6 +99,10 @@ export default function MedicineReminderScreen() {
           <Text style={{ fontSize: 15, fontFamily: "Poppins_600SemiBold" }}>
             Daily Review
           </Text>
+          {/* <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id} */}
         </View>
       </View>
     </View>

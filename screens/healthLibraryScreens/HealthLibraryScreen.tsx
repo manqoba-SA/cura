@@ -5,8 +5,10 @@ import { Ionicons } from "@expo/vector-icons";
 import Sicknesses from "../../constants/dummyData/sicknesses";
 import LibraryList from "../../components/healthLibraryComponent/LibraryList";
 import CustomSearchBar from "../../components/CustomSearchBar/CustomSearchBar";
+import { Articles } from "../../constants/dummyData/Article";
+import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 
-export default function HealthLibraryScreen() {
+export default function HealthLibraryScreen({ navigation }) {
   // const [search, setSearch] = useState("")
   // const GetSectionListItem = (item) => {
   //   // Alert.alert(item);
@@ -19,15 +21,12 @@ export default function HealthLibraryScreen() {
   // };
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [fakeData, setFakeData] = useState();
+  const [fakeData, setFakeData] = useState([]);
 
   // get data from the fake api endpoint
   useEffect(() => {
     const getData = async () => {
-      const apiResponse = await fetch(
-        "https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
-      );
-      const data = await apiResponse.json();
+      const data = await Sicknesses;
       setFakeData(data);
     };
     getData();
@@ -36,7 +35,6 @@ export default function HealthLibraryScreen() {
   return (
     <View style={{ backgroundColor: "#fff", flex: 1.0 }}>
       <View style={styles.container}>
-        {/* {!clicked && <Text style={styles.title}></Text>} */}
         <CustomSearchBar
           searchPhrase={searchPhrase}
           setSearchPhrase={setSearchPhrase}
@@ -48,37 +46,8 @@ export default function HealthLibraryScreen() {
           searchPhrase={searchPhrase}
           data={fakeData}
           setCLicked={setClicked}
+          onPress={() => navigation.navigate("sicknessDetail")}
         />
-
-        {/* )} */}
-
-        {/* <SearchBar
-          // style={styles.SectionListItemS}
-          placeholder="Search Topic or Condition"
-        />
-
-        <SectionList
-          sections={Sicknesses}
-          renderSectionHeader={({ section }) => (
-            <Text style={styles.SectionHeader}> {section.title} </Text>
-          )}
-          renderItem={({ item }) => (
-            <Text
-              style={styles.SectionListItemS}
-              // onPress={this.GetSectionListItem.bind(this, item)}
-            >
-              {" "}
-              {item}
-              <Ionicons
-                name="enter-outline"
-                size={24}
-                color="black"
-                style={styles.iconpos}
-              />
-            </Text>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        /> */}
       </View>
     </View>
   );

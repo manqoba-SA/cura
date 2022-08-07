@@ -1,26 +1,57 @@
-import { View, Text, SafeAreaView, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  SectionList,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import {
-  Poppins_400Regular,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
+import COLORS from "../../constants/COLORS";
+import { Poppins_300Light } from "@expo-google-fonts/poppins";
+import { useNavigation } from "@react-navigation/native";
 
 // definition of the Item, which will be rendered in the FlatList
-const Item = ({ name, details }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{name}</Text>
+const Item = ({ name, description, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.item}>
+    <View>
+      <Text style={styles.title}>{name}</Text>
+      <Text
+        numberOfLines={1}
+        style={{ color: COLORS.primary.text, fontFamily: "Poppins_400Regular" }}
+      >
+        {description}
+      </Text>
+    </View>
     <View>
       <Ionicons name="md-enter-outline" size={35} color="black" />
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
-export default function LibraryList({ searchPhrase, setCLicked, data }) {
-  const renderItem = ({ item }) => {
+export default function LibraryList({
+  searchPhrase,
+  setCLicked,
+  data,
+  onPress,
+}) {
+  // const navigation = useNavigation();
+  const renderItem = ({ item, section: { title } }) => {
     // when no input, show all
     if (searchPhrase === "") {
-      return <Item name={item.name} details={item.details} />;
+      //filter by category
+      if (item.category === title) {
+        return (
+          <Item
+            name={item.name}
+            description={item.description}
+            onPress={onPress}
+          />
+        );
+      } else {
+        return null;
+      }
     }
     // filter of the name
     if (
@@ -28,15 +59,27 @@ export default function LibraryList({ searchPhrase, setCLicked, data }) {
         .toUpperCase()
         .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
     ) {
-      return <Item name={item.name} details={item.details} />;
+      return (
+        <Item
+          name={item.name}
+          description={item.description}
+          onPress={onPress}
+        />
+      );
     }
     // filter of the description
     if (
-      item.details
+      item.description
         .toUpperCase()
         .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
     ) {
-      return <Item name={item.name} details={item.details} />;
+      return (
+        <Item
+          name={item.name}
+          description={item.description}
+          onPress={onPress}
+        />
+      );
     }
   };
 
@@ -47,10 +90,22 @@ export default function LibraryList({ searchPhrase, setCLicked, data }) {
           setCLicked(false);
         }}
       >
-        <FlatList
-          data={data}
-          renderItem={renderItem}
+        <SectionList
+          sections={data}
           keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text
+              style={{
+                marginHorizontal: 20,
+                marginVertical: 15,
+                fontFamily: "Poppins_400Regular",
+                fontSize: 15,
+              }}
+            >
+              {title}
+            </Text>
+          )}
         />
       </View>
     </SafeAreaView>
@@ -59,24 +114,20 @@ export default function LibraryList({ searchPhrase, setCLicked, data }) {
 
 const styles = StyleSheet.create({
   list__container: {
-    // margin: 10,
-    height: "85%",
     width: "100%",
   },
   item: {
-    margin: 10,
-    // borderBottomWidth: 2,
+    marginHorizontal: 20,
+    marginVertical: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#fff",
-    padding: 25,
+    padding: 24,
     borderRadius: 10,
   },
   title: {
-    fontSize: 16,
-    // fontWeight: "bold",
-    // marginBottom: 5,
+    fontSize: 15,
     fontFamily: "Poppins_600SemiBold",
   },
 });

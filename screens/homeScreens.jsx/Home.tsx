@@ -1,13 +1,5 @@
 import React from "react";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
-import COLORS from "../../constants/COLORS";
-import { Icon } from "@iconify/react";
-import settingsIcon from "@iconify/icons-arcticons/settings";
-import { Ionicons } from "@expo/vector-icons";
-import {
-  Poppins_400Regular,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
 import CustomBox from "../../components/homePageComponents/CustomBox";
 
 export default function Home({ navigation }) {
