@@ -9,7 +9,13 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
+import { AntDesign } from "@expo/vector-icons";
+import {
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
+import COLORS from "../../constants/COLORS";
+import { Articles } from "../../constants/dummyData/Article";
 
 const ExpandableComponent = ({ item, onClickFunction }) => {
   //Custom Component for the Expandable List
@@ -32,6 +38,7 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
         style={styles.header}
       >
         <Text style={styles.headerText}>{item.category_name}</Text>
+        <AntDesign name="caretdown" size={24} color="#fff" />
       </TouchableOpacity>
       <View
         style={{
@@ -41,23 +48,33 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
       >
         {/*Content under the header of the Expandable List Item*/}
         {item.subcategory.map((item, key) => (
-          <TouchableOpacity
-            key={key}
-            style={styles.content}
-            onPress={() => alert("Id: " + item.id + " val: " + item.val)}
-          >
-            <Text style={styles.text}>
-              {key}. {item.val}
-            </Text>
-            <View style={styles.separator} />
-          </TouchableOpacity>
+          <View key={key} style={styles.content}>
+            <Text style={styles.text}>{item.val}</Text>
+            {/* <View style={styles.separator} /> */}
+          </View>
         ))}
       </View>
     </View>
   );
 };
 
-export default function SicknessDetailScreen() {
+export default function SicknessDetailScreen({ route }) {
+  const data = Articles.find((o) => o.id === route.params.id);
+  const CONTENT = [
+    {
+      isExpanded: false,
+      category_name: "Risks",
+      subcategory: [{ id: 1, val: "Eish" }],
+    },
+    {
+      isExpanded: false,
+      category_name: "Diagnosis",
+      subcategory: [
+        { id: 4, val: "Sub Cat 4" },
+        { id: 5, val: "Sub Cat 5" },
+      ],
+    },
+  ];
   const [listDataSource, setListDataSource] = useState(CONTENT);
   const [multiSelect, setMultiSelect] = useState(false);
 
@@ -84,7 +101,12 @@ export default function SicknessDetailScreen() {
   return (
     <View style={{ backgroundColor: "#E5E5E5", flex: 1.0 }}>
       <View
-        style={{ flex: 1.0, alignItems: "center", justifyContent: "center" }}
+        style={{
+          flex: 1.0,
+          alignItems: "center",
+          justifyContent: "center",
+          marginHorizontal: 11,
+        }}
       >
         <Text style={{ fontSize: 24, fontFamily: "Poppins_600SemiBold" }}>
           Overview
@@ -133,12 +155,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   header: {
-    backgroundColor: "#F5FCFF",
-    padding: 20,
+    backgroundColor: COLORS.primary.text,
+    borderRadius: 10,
+    padding: 15,
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   headerText: {
     fontSize: 16,
-    fontWeight: "500",
+    fontFamily: "Poppins_500Medium",
+    color: "#fff",
+    marginLeft: "25%",
+    // textAlign: "center",
   },
   separator: {
     height: 0.5,
@@ -158,22 +186,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
-
-const CONTENT = [
-  {
-    isExpanded: false,
-    category_name: "Item 1",
-    subcategory: [
-      { id: 1, val: "Sub Cat 1" },
-      { id: 3, val: "Sub Cat 3" },
-    ],
-  },
-  {
-    isExpanded: false,
-    category_name: "Item 2",
-    subcategory: [
-      { id: 4, val: "Sub Cat 4" },
-      { id: 5, val: "Sub Cat 5" },
-    ],
-  },
-];

@@ -16,11 +16,13 @@ export default function Home({ navigation }) {
           <CustomBox
             title={"Health\nLibrary"}
             type="half"
+            subtitle={""}
             onPress={() => navigation.navigate("healthLibrary")}
           />
           <CustomBox
             title={"Medicine\nReminder"}
             type="half"
+            subtitle={""}
             onPress={() => navigation.navigate("medineReminderScreen")}
           />
         </View>
