@@ -9,16 +9,6 @@ import { Articles } from "../../constants/dummyData/Article";
 import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 export default function HealthLibraryScreen({ navigation }) {
-  // const [search, setSearch] = useState("")
-  // const GetSectionListItem = (item) => {
-  //   // Alert.alert(item);
-
-  //   this.state = { search: "" };
-
-  //   const updateSearch = (search) => {
-  //     this.setState({ search });
-  //   };
-  // };
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState([]);
@@ -26,7 +16,7 @@ export default function HealthLibraryScreen({ navigation }) {
   // get data from the fake api endpoint
   useEffect(() => {
     const getData = async () => {
-      const data = await Sicknesses;
+      const data = Sicknesses;
       setFakeData(data);
     };
     getData();
@@ -46,7 +36,7 @@ export default function HealthLibraryScreen({ navigation }) {
           searchPhrase={searchPhrase}
           data={fakeData}
           setCLicked={setClicked}
-          onPress={() => navigation.navigate("sicknessDetail")}
+          navigation={navigation}
         />
       </View>
     </View>

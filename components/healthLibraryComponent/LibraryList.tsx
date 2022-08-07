@@ -35,6 +35,7 @@ export default function LibraryList({
   setCLicked,
   data,
   onPress,
+  navigation,
 }) {
   // const navigation = useNavigation();
   const renderItem = ({ item, section: { title } }) => {
@@ -46,7 +47,9 @@ export default function LibraryList({
           <Item
             name={item.name}
             description={item.description}
-            onPress={onPress}
+            onPress={() =>
+              navigation.navigate("sicknessDetail", { id: item.id })
+            }
           />
         );
       } else {
@@ -63,7 +66,7 @@ export default function LibraryList({
         <Item
           name={item.name}
           description={item.description}
-          onPress={onPress}
+          onPress={() => navigation.navigate("sicknessDetail", { id: item.id })}
         />
       );
     }
@@ -77,7 +80,7 @@ export default function LibraryList({
         <Item
           name={item.name}
           description={item.description}
-          onPress={onPress}
+          onPress={() => navigation.navigate("sicknessDetail", { id: item.id })}
         />
       );
     }
