@@ -1,37 +1,40 @@
 import React from "react";
-import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import CustomBox from "../../components/homePageComponents/CustomBox";
-
+const { width } = Dimensions.get("window");
 export default function Home({ navigation }) {
-  const { width, height } = Dimensions.get("window");
+  const images = {
+    diagnose: require("../../../cura/assets/images/illustrations/undraw_doctors_hwty.png"),
+    healthLibrary: require("../../../cura/assets/images/illustrations/library.png"),
+    medicineReminder: require("../../../cura/assets/images/illustrations/reminder.png"),
+  };
   return (
-    <View style={{ backgroundColor: "#E5E5E5", flex: 1.0 }}>
-      <View style={{ flex: 1.0 }}>
+    <View style={styles.container}>
+      <View style={styles.diagnoseBoxWrap}>
         <CustomBox
           title={"Diagnose"}
           subtitle="Hi Oratile, I can help you learn more about your sysmptoms"
           onPress={() => navigation.navigate("diagnosis")}
-          image={require("../../../cura/assets/images/illustrations/undraw_doctors_hwty.png")}
+          image={images.diagnose}
         />
-        <View style={{ flexDirection: "row", width: width * 0.8 }}>
+        <View style={styles.healthLibraryAndReminderBoxWrap}>
           <CustomBox
             onPress={() => navigation.navigate("healthLibrary")}
             title={"Health\nLibrary"}
             type="half"
             subtitle={""}
-            image={require("../../../cura/assets/images/illustrations/library.png")}
+            image={images.healthLibrary}
           />
           <CustomBox
             onPress={() => navigation.navigate("medineReminderScreen")}
             title={"Medicine\nReminder"}
             type="half"
             subtitle={""}
-            image={require("../../../cura/assets/images/illustrations/reminder.png")}
+            image={images.medicineReminder}
           />
         </View>
-        <View style={{ margin: 20 }}>
-          <Text style={{ fontFamily: "Poppins_400Regular", fontSize: 20 }}>
+        <View style={styles.articlesWrap}>
+          <Text style={styles.atrticlesHeaderText}>
             Check latest Health Articles
           </Text>
           <CustomBox
@@ -46,3 +49,11 @@ export default function Home({ navigation }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { backgroundColor: "#E5E5E5", flex: 1.0 },
+  diagnoseBoxWrap: { flex: 1.0 },
+  healthLibraryAndReminderBoxWrap: { flexDirection: "row", width: width * 0.8 },
+  articlesWrap: { margin: 20 },
+  atrticlesHeaderText: { fontFamily: "Poppins_400Regular", fontSize: 20 },
+});
