@@ -5,15 +5,23 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import React from "react";
 import COLORS from "../../constants/COLORS";
 
-export default function CustomBox({ title, subtitle, type = "full", onPress }) {
+export default function CustomBox({
+  title,
+  subtitle,
+  type = "full",
+  onPress,
+  image,
+}) {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[styles.box, styles[`${type}_box`]]}
+      // pressRetentionOffset={200}
     >
       {type === "medium" ? (
         <View style={{ flex: 1.0, marginTop: 20 }}>
@@ -27,8 +35,9 @@ export default function CustomBox({ title, subtitle, type = "full", onPress }) {
       ) : (
         <>
           <Image
-            source={require("../../../cura/assets/images/illustrations/undraw_doctors_hwty.png")}
+            source={image}
             style={[styles.boxImage, styles[`${type}_boxImage`]]}
+            key={image}
           />
           {type === "full" ? (
             <View style={{ flex: 1.0 }}>
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
   half_box: {
     marginHorizontal: 20,
     width: "50%",
+    // backgroundColor: "#ccc",
   },
   medium_box: {
     backgroundColor: COLORS.light.background,
@@ -77,7 +87,9 @@ const styles = StyleSheet.create({
     height: "70%",
   },
   half_boxImage: {
+    width: "50%",
     height: "50%",
+    resizeMode: "cover",
   },
   boxTitle: {
     color: COLORS.primary.text,

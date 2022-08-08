@@ -64,7 +64,12 @@ export default function SicknessDetailScreen({ route }) {
     {
       isExpanded: false,
       category_name: "Risks",
-      subcategory: [{ id: 1, val: "Eish" }],
+      subcategory: [
+        {
+          id: 1,
+          val: "Eish fede fgvvr fylllk hhuh affd manqoba ngubeni jj bnhbhbb mmioioi",
+        },
+      ],
     },
     {
       isExpanded: false,
@@ -157,7 +162,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: COLORS.primary.text,
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -170,7 +175,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 0.5,
-    backgroundColor: "#808080",
+    backgroundColor: "#E5E5E5",
     width: "95%",
     marginLeft: 16,
     marginRight: 16,
@@ -183,6 +188,6 @@ const styles = StyleSheet.create({
   content: {
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#E5E5E5",
   },
 });
