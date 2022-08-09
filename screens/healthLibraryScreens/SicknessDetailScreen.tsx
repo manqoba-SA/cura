@@ -10,10 +10,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import {
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
 import COLORS from "../../constants/COLORS";
 import { Articles } from "../../constants/dummyData/Article";
 
@@ -67,16 +63,33 @@ export default function SicknessDetailScreen({ route }) {
       subcategory: [
         {
           id: 1,
-          val: "Eish fede fgvvr fylllk hhuh affd manqoba ngubeni jj bnhbhbb mmioioi",
+          val: data?.risks,
         },
       ],
     },
     {
       isExpanded: false,
       category_name: "Diagnosis",
+      subcategory: [{ id: 1, val: data?.diagnosis }],
+    },
+    {
+      isExpanded: false,
+      category_name: "Treatment",
       subcategory: [
-        { id: 4, val: "Sub Cat 4" },
-        { id: 5, val: "Sub Cat 5" },
+        {
+          id: 1,
+          val: data?.treatment,
+        },
+      ],
+    },
+    {
+      isExpanded: false,
+      category_name: "Prevention",
+      subcategory: [
+        {
+          id: 1,
+          val: data?.prevention,
+        },
       ],
     },
   ];
@@ -104,23 +117,34 @@ export default function SicknessDetailScreen({ route }) {
     setListDataSource(array);
   };
   return (
-    <View style={{ backgroundColor: "#E5E5E5", flex: 1.0 }}>
+    <ScrollView style={{ backgroundColor: "#E5E5E5", flex: 1.0 }}>
       <View
         style={{
           flex: 1.0,
           alignItems: "center",
           justifyContent: "center",
-          marginHorizontal: 11,
+          marginHorizontal: 15,
+          marginVertical: 15,
         }}
       >
-        <Text style={{ fontSize: 24, fontFamily: "Poppins_600SemiBold" }}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontFamily: "Poppins_600SemiBold",
+            marginVertical: 20,
+          }}
+        >
           Overview
         </Text>
-        <Text style={{ color: "#979797", fontSize: 15 }}>
-          A spectacular visual journey through 40 years of haute couture from
-          one of the best-known and most trend-setting brands in fashion.A
-          spectacular visual journey through 40 years of haute couture from one
-          of the best-known and most trend-setting brands in fashion.
+        <Text
+          style={{
+            color: "#606070",
+            fontSize: 15,
+            textAlign: "justify",
+            fontFamily: "Poppins_400Regular",
+          }}
+        >
+          {data?.overview}
         </Text>
       </View>
       <View
@@ -131,7 +155,7 @@ export default function SicknessDetailScreen({ route }) {
           width: "100%",
         }}
       >
-        <ScrollView
+        <View
           style={{
             width: "100%",
           }}
@@ -145,9 +169,9 @@ export default function SicknessDetailScreen({ route }) {
               item={item}
             />
           ))}
-        </ScrollView>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -183,7 +207,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: "#606070",
-    padding: 10,
+    padding: 5,
+    lineHeight: 20,
+    fontFamily: "Poppins_400Regular",
+    textAlign: "justify",
   },
   content: {
     paddingLeft: 10,

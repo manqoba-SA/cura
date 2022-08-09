@@ -1,10 +1,17 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function shopScreen() {
+export default function ShopScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>shopScreen</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#E5E5E5",
+    flex: 1.0,
+  },
+});

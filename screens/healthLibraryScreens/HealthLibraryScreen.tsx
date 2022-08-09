@@ -12,6 +12,7 @@ export default function HealthLibraryScreen({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState([]);
+  // console.log(searchPhrase);
 
   // get data from the fake api endpoint
   useEffect(() => {

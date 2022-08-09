@@ -30,7 +30,7 @@ export default function HealthLibraryNavigator() {
         name="sicknessDetail"
         options={({ route }) => ({
           headerShown: true,
-          title: route.params.id,
+          title: route.params.title,
           headerShadowVisible: false,
           headerStyle: {
             backgroundColor: "#fff",

@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/COLORS";
 import { Poppins_300Light } from "@expo-google-fonts/poppins";
 import { useNavigation } from "@react-navigation/native";
+import SearchableSectionList from "./SearchableSectionList";
 
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, description, onPress }) => (
@@ -37,52 +38,22 @@ export default function LibraryList({
   onPress,
   navigation,
 }) {
-  // const navigation = useNavigation();
   const renderItem = ({ item, section: { title } }) => {
-    // when no input, show all
-    if (searchPhrase === "") {
-      //filter by category
-      if (item.category === title) {
-        return (
-          <Item
-            name={item.name}
-            description={item.description}
-            onPress={() =>
-              navigation.navigate("sicknessDetail", { id: item.id })
-            }
-          />
-        );
-      } else {
-        return null;
-      }
-    }
-    // filter of the name
-    if (
-      item.name
-        .toUpperCase()
-        .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
-    ) {
+    if (item.category === title) {
       return (
         <Item
           name={item.name}
           description={item.description}
-          onPress={() => navigation.navigate("sicknessDetail", { id: item.id })}
+          onPress={() =>
+            navigation.navigate("sicknessDetail", {
+              id: item.id,
+              title: item.name,
+            })
+          }
         />
       );
-    }
-    // filter of the description
-    if (
-      item.description
-        .toUpperCase()
-        .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
-    ) {
-      return (
-        <Item
-          name={item.name}
-          description={item.description}
-          onPress={() => navigation.navigate("sicknessDetail", { id: item.id })}
-        />
-      );
+    } else {
+      return null;
     }
   };
 
@@ -94,21 +65,42 @@ export default function LibraryList({
         }}
       >
         <SectionList
-          sections={data}
+          sections={
+            searchPhrase !== ""
+              ? data.map((element) => {
+                  return {
+                    ...element,
+                    data: element.data.filter((subElement) =>
+                      subElement.name
+                        .toUpperCase()
+                        .includes(
+                          searchPhrase.toUpperCase().trim().replace(/\s/g, "")
+                        )
+                    ),
+                  };
+                })
+              : data
+          }
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text
-              style={{
-                marginHorizontal: 20,
-                marginVertical: 15,
-                fontFamily: "Poppins_400Regular",
-                fontSize: 15,
-              }}
-            >
-              {title}
-            </Text>
-          )}
+          renderSectionHeader={({ section: { title } }) => {
+            if (searchPhrase === "") {
+              return (
+                <Text
+                  style={{
+                    marginHorizontal: 20,
+                    marginVertical: 15,
+                    fontFamily: "Poppins_400Regular",
+                    fontSize: 15,
+                  }}
+                >
+                  {title}
+                </Text>
+              );
+            } else {
+              return null;
+            }
+          }}
         />
       </View>
     </SafeAreaView>
