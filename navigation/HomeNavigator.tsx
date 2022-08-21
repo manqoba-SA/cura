@@ -18,7 +18,7 @@ export default function HomeNavigator() {
         options={{
           headerShown: true,
           header: (props) => (
-            <CustomHeader navigation={""} title={"Hi, Oratile"} {...props} />
+            <CustomHeader navigation={""} title={"Hi, Manqoba"} {...props} />
           ),
         }}
         name="home"

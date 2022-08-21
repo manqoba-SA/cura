@@ -75,8 +75,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "#ccc",
   },
   medium_box: {
+    // backgroundColor: "#ccc",
     backgroundColor: COLORS.light.background,
-    width: "80%",
+    width: "100%",
     marginTop: 12,
   },
   boxImage: {
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     width: "50%",
     height: "50%",
     resizeMode: "cover",
+    margin: 0,
   },
   boxTitle: {
     color: COLORS.primary.text,
