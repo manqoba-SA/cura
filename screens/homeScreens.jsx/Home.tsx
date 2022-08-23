@@ -7,13 +7,25 @@ const { width } = Dimensions.get("window");
 
 const renderItem = ({ item, index }) => {
   return (
-    <CustomBox
-      title={item.title}
-      subtitle={item.description}
-      type="medium"
-      onPress={""}
-      image={""}
-    />
+    <>
+      {item.id === 4 ? (
+        <CustomBox
+          title={"See All Articles"}
+          subtitle={""}
+          // type="medium"
+          onPress={""}
+          image={"../../../cura/assets/images/illustrations/reminder.png"}
+        />
+      ) : (
+        <CustomBox
+          title={item.title}
+          subtitle={item.description}
+          type="medium"
+          onPress={""}
+          image={""}
+        />
+      )}
+    </>
   );
 };
 export default function Home({ navigation }) {
@@ -52,13 +64,6 @@ export default function Home({ navigation }) {
           <Text style={styles.atrticlesHeaderText}>
             Check latest Health Articles
           </Text>
-          {/* <CustomBox
-            title={"Sleep meditation"}
-            subtitle="Heaalth is very important in life because when health is a alive.."
-            type="medium"
-            onPress={() => navigation.navigate("diagnosis")}
-            image={""}
-          /> */}
           <Carousel
             // ref={(c) => { this._carousel = c; }}
             data={Information}
