@@ -5,30 +5,30 @@ import CustomBox from "../../components/homePageComponents/CustomBox";
 import { Information } from "../../constants/dummyData/information";
 const { width } = Dimensions.get("window");
 
-const renderItem = ({ item, index }) => {
-  return (
-    <>
-      {item.id === 4 ? (
-        <CustomBox
-          title={"See All Articles"}
-          subtitle={""}
-          // type="medium"
-          onPress={""}
-          image={"../../../cura/assets/images/illustrations/reminder.png"}
-        />
-      ) : (
-        <CustomBox
-          title={item.title}
-          subtitle={item.description}
-          type="medium"
-          onPress={""}
-          image={""}
-        />
-      )}
-    </>
-  );
-};
 export default function Home({ navigation }) {
+  const renderItem = ({ item, index }) => {
+    return (
+      <>
+        {item.id === 4 ? (
+          <CustomBox
+            title={"See All Articles"}
+            subtitle={""}
+            type="swiper"
+            onPress={() => navigation.navigate("articlesScreen")}
+            image={"../../../cura/assets/images/illustrations/reminder.png"}
+          />
+        ) : (
+          <CustomBox
+            title={item.title}
+            subtitle={item.description}
+            type="medium"
+            onPress={""}
+            image={""}
+          />
+        )}
+      </>
+    );
+  };
   const { width, height } = Dimensions.get("window");
   const images = {
     diagnose: require("../../../cura/assets/images/illustrations/undraw_doctors_hwty.png"),

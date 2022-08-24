@@ -8,6 +8,7 @@ import DiagnoseScreen from "../screens/diagnoseScreens/DiagnoseScreen";
 import SettingsScreen from "../screens/settingsScreens/SettingsScreen";
 import HealthLibraryScreen from "../screens/healthLibraryScreens/HealthLibraryScreen";
 import MedicineReminderScreen from "../screens/medicineReminder/MedicineReminderScreen";
+import ArticlesScreen from "../screens/articlesScreens/ArticlesScreen";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ export default function HomeNavigator() {
       />
       <Stack.Screen component={SettingsScreen} name="settings" />
       <Stack.Screen component={HealthLibraryScreen} name="healthLibrary" />
+      <Stack.Screen component={ArticlesScreen} name="articlesScreen" />
       {/* <Stack.Screen component={MedicineReminderScreen} name="reminder" /> */}
     </Stack.Navigator>
   );

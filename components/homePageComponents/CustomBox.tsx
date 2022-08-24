@@ -72,13 +72,14 @@ const styles = StyleSheet.create({
   half_box: {
     marginHorizontal: 20,
     width: "50%",
-    // backgroundColor: "#ccc",
   },
   medium_box: {
-    // backgroundColor: "#ccc",
     backgroundColor: COLORS.light.background,
     width: "100%",
     marginTop: 12,
+  },
+  swiper_box: {
+    width: "100%",
   },
   boxImage: {
     resizeMode: "contain",
