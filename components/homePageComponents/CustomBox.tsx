@@ -72,13 +72,14 @@ const styles = StyleSheet.create({
   half_box: {
     marginHorizontal: 20,
     width: "50%",
-    // backgroundColor: "#ccc",
   },
   medium_box: {
-    // backgroundColor: "#ccc",
     backgroundColor: COLORS.light.background,
     width: "100%",
     marginTop: 12,
+  },
+  swiper_box: {
+    width: "100%",
   },
   boxImage: {
     resizeMode: "contain",
@@ -97,6 +98,12 @@ const styles = StyleSheet.create({
     color: COLORS.primary.text,
     fontFamily: "Poppins_600SemiBold",
     fontSize: 20,
+  },
+  medium_boxTitle: {
+    marginHorizontal: 10,
+  },
+  medium_boxSubTitle: {
+    marginHorizontal: 10,
   },
   boxSubTitle: {
     fontFamily: "Poppins_400Regular",

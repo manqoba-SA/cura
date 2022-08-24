@@ -5,18 +5,35 @@ import CustomBox from "../../components/homePageComponents/CustomBox";
 import { Information } from "../../constants/dummyData/information";
 const { width } = Dimensions.get("window");
 
-const renderItem = ({ item, index }) => {
-  return (
-    <CustomBox
-      title={item.title}
-      subtitle={item.description}
-      type="medium"
-      onPress={""}
-      image={""}
-    />
-  );
-};
 export default function Home({ navigation }) {
+  const renderItem = ({ item, index }) => {
+    return (
+      <>
+        {item.id === 4 ? (
+          <CustomBox
+            title={"See All Articles"}
+            subtitle={""}
+            type="swiper"
+            onPress={() => navigation.navigate("articlesScreen")}
+            image={"../../../cura/assets/images/illustrations/reminder.png"}
+          />
+        ) : (
+          <CustomBox
+            title={item.title}
+            subtitle={item.description}
+            type="medium"
+            onPress={() =>
+              navigation.navigate("articleDetails", {
+                id: item.id,
+                title: item.title,
+              })
+            }
+            image={""}
+          />
+        )}
+      </>
+    );
+  };
   const { width, height } = Dimensions.get("window");
   const images = {
     diagnose: require("../../../cura/assets/images/illustrations/undraw_doctors_hwty.png"),
@@ -52,13 +69,6 @@ export default function Home({ navigation }) {
           <Text style={styles.atrticlesHeaderText}>
             Check latest Health Articles
           </Text>
-          {/* <CustomBox
-            title={"Sleep meditation"}
-            subtitle="Heaalth is very important in life because when health is a alive.."
-            type="medium"
-            onPress={() => navigation.navigate("diagnosis")}
-            image={""}
-          /> */}
           <Carousel
             // ref={(c) => { this._carousel = c; }}
             data={Information}

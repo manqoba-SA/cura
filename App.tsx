@@ -30,6 +30,7 @@ import {
 import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 import { Lato_400Regular } from "@expo-google-fonts/lato";
+import { extendTheme, NativeBaseProvider } from "native-base";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -54,13 +55,38 @@ export default function App() {
     Poppins_900Black,
     Poppins_900Black_Italic,
   });
+  const theme = extendTheme({
+    colors: {
+      // Add new color
+      primary: {
+        50: "#409849",
+      },
+      secondary: {
+        50: "#A1A3AB",
+      },
+      tertiary: {
+        50: "#F8F8F6",
+      },
+
+      // Redefining only one shade, rest of the color will remain same.
+      amber: {
+        400: "#d97706",
+      },
+    },
+    // config: {
+    //   // Changing initialColorMode to 'dark'
+    //   initialColorMode: "dark",
+    // },
+  });
   if (!fontsLoaded) {
     return null;
   } else {
     return (
-      <NavigationContainer theme={navigationTheme}>
-        {user ? <AppNavigator /> : <AuthNavigator />}
-      </NavigationContainer>
+      <NativeBaseProvider theme={theme}>
+        <NavigationContainer theme={navigationTheme}>
+          {user ? <AppNavigator /> : <AuthNavigator />}
+        </NavigationContainer>
+      </NativeBaseProvider>
     );
   }
 }
