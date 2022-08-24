@@ -22,7 +22,12 @@ export default function Home({ navigation }) {
             title={item.title}
             subtitle={item.description}
             type="medium"
-            onPress={""}
+            onPress={() =>
+              navigation.navigate("articleDetails", {
+                id: item.id,
+                title: item.title,
+              })
+            }
             image={""}
           />
         )}

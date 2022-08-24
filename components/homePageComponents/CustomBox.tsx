@@ -99,6 +99,12 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_600SemiBold",
     fontSize: 20,
   },
+  medium_boxTitle: {
+    marginHorizontal: 10,
+  },
+  medium_boxSubTitle: {
+    marginHorizontal: 10,
+  },
   boxSubTitle: {
     fontFamily: "Poppins_400Regular",
     color: "grey",
