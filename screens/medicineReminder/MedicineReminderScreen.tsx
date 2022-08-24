@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Plans from "../../constants/dummyData/plans";
 import ReminderItem from "../../components/ReminderComponents/Lists/ReminderItem";
 import ReminderBox from "../../components/ReminderComponents/Box/ReminderBox";
 import ReminderAddButton from "../../components/ReminderComponents/Buttons/ReminderAddButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import DatePicker from "react-native-date-picker";
 import {
   Actionsheet,
   Box,
@@ -35,6 +42,9 @@ export default function MedicineReminderScreen() {
     { label: "Apple", value: "apple" },
     { label: "Banana", value: "banana" },
   ]);
+
+  const [date, setDate] = useState(new Date());
+  const [open1, setOpen1] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.wrap}>
@@ -160,16 +170,21 @@ export default function MedicineReminderScreen() {
               <View style={{ marginHorizontal: 25, marginTop: 10 }}>
                 <FormControl w="100%">
                   <FormControl.Label>Notification</FormControl.Label>
-                  <DropDownPicker
-                    multiple={true}
-                    min={4}
-                    max={5}
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+
+                  <TouchableOpacity onPress={() => setOpen1(true)}>
+                    <Text>Click</Text>
+                  </TouchableOpacity>
+                  <DatePicker
+                    modal
+                    open={open1}
+                    date={date}
+                    onConfirm={(date) => {
+                      setOpen1(false);
+                      setDate(date);
+                    }}
+                    onCancel={() => {
+                      setOpen1(false);
+                    }}
                   />
                 </FormControl>
               </View>
