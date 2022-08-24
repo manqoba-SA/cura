@@ -19,6 +19,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import ReminderInputForm from "../../components/ReminderComponents/Forms/ReminderInputForm";
 import ReminderSelectInput from "../../components/ReminderComponents/Forms/ReminderSelectInput";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export default function MedicineReminderScreen() {
   const renderItem = ({ item }) => (
@@ -28,6 +29,12 @@ export default function MedicineReminderScreen() {
   const { isOpen, onOpen, onClose } = useDisclose();
 
   let [medicineType, setMedicineType] = React.useState("pills");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState([]);
+  const [items, setItems] = useState([
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+  ]);
   return (
     <View style={styles.container}>
       <View style={styles.wrap}>
@@ -44,7 +51,7 @@ export default function MedicineReminderScreen() {
           <ReminderAddButton onPress={onOpen} />
         </View>
         <Actionsheet isOpen={isOpen} onClose={onClose}>
-          <Actionsheet.Content>
+          <Actionsheet.Content bg={"#fff"}>
             <View>
               <Text style={{ fontFamily: "Poppins_600SemiBold", fontSize: 20 }}>
                 Add Plan
@@ -127,6 +134,43 @@ export default function MedicineReminderScreen() {
                   <FormControl.Label>
                     How often do you take this medicine?
                   </FormControl.Label>
+                  <DropDownPicker
+                    style={{
+                      backgroundColor: "#F8F8F6",
+                      borderWidth: 0,
+                      borderRadius: 14,
+                    }}
+                    textStyle={{
+                      fontSize: 15,
+                      color: "#a1a1aa",
+                    }}
+                    mode="BADGE"
+                    multiple={true}
+                    min={4}
+                    max={5}
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                  />
+                </FormControl>
+              </View>
+              <View style={{ marginHorizontal: 25, marginTop: 10 }}>
+                <FormControl w="100%">
+                  <FormControl.Label>Notification</FormControl.Label>
+                  <DropDownPicker
+                    multiple={true}
+                    min={4}
+                    max={5}
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                  />
                 </FormControl>
               </View>
             </View>
