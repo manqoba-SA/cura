@@ -30,6 +30,7 @@ import {
 import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 import { Lato_400Regular } from "@expo-google-fonts/lato";
+import { NativeBaseProvider } from "native-base";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -58,9 +59,11 @@ export default function App() {
     return null;
   } else {
     return (
-      <NavigationContainer theme={navigationTheme}>
-        {user ? <AppNavigator /> : <AuthNavigator />}
-      </NavigationContainer>
+      <NativeBaseProvider>
+        <NavigationContainer theme={navigationTheme}>
+          {user ? <AppNavigator /> : <AuthNavigator />}
+        </NavigationContainer>
+      </NativeBaseProvider>
     );
   }
 }
