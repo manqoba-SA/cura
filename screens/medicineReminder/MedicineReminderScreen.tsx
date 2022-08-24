@@ -4,12 +4,30 @@ import Plans from "../../constants/dummyData/plans";
 import ReminderItem from "../../components/ReminderComponents/Lists/ReminderItem";
 import ReminderBox from "../../components/ReminderComponents/Box/ReminderBox";
 import ReminderAddButton from "../../components/ReminderComponents/Buttons/ReminderAddButton";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Actionsheet,
+  Box,
+  CheckIcon,
+  FormControl,
+  Icon,
+  Input,
+  Select,
+  useDisclose,
+} from "native-base";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
+import ReminderInputForm from "../../components/ReminderComponents/Forms/ReminderInputForm";
+import ReminderSelectInput from "../../components/ReminderComponents/Forms/ReminderSelectInput";
 
 export default function MedicineReminderScreen() {
   const renderItem = ({ item }) => (
     <ReminderItem name={item.title} status={item.status} time={item.time} />
   );
   const [data, setData] = useState(Plans);
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  let [medicineType, setMedicineType] = React.useState("pills");
   return (
     <View style={styles.container}>
       <View style={styles.wrap}>
@@ -23,8 +41,97 @@ export default function MedicineReminderScreen() {
           />
         </View>
         <View style={styles.addButtonWrap}>
-          <ReminderAddButton />
+          <ReminderAddButton onPress={onOpen} />
         </View>
+        <Actionsheet isOpen={isOpen} onClose={onClose}>
+          <Actionsheet.Content>
+            <View>
+              <Text style={{ fontFamily: "Poppins_600SemiBold", fontSize: 20 }}>
+                Add Plan
+              </Text>
+            </View>
+            <View style={{ marginHorizontal: 20, width: "100%" }}>
+              <View style={{ marginHorizontal: 25 }}>
+                <FormControl w="100%">
+                  <FormControl.Label>Pill/Medicine Name</FormControl.Label>
+                  <ReminderInputForm
+                    placeholder={"eg.panado"}
+                    icon={<Fontisto name="pills" size={30} color="#9B9B9B" />}
+                  />
+                </FormControl>
+              </View>
+              <View style={{ marginHorizontal: 25, marginTop: 10 }}>
+                <FormControl w="100%">
+                  <FormControl.Label>
+                    Dose Amount & Medicine Type
+                  </FormControl.Label>
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      width: "100%",
+                      // paddingHorizontal: 10,
+                    }}
+                  >
+                    <ReminderInputForm
+                      type="dose"
+                      placeholder={"Dose Amount"}
+                      icon={
+                        <MaterialCommunityIcons
+                          name="pill"
+                          size={24}
+                          color="#9B9B9B"
+                        />
+                      }
+                    />
+                    <ReminderSelectInput
+                      medicineType={medicineType}
+                      onValueChange={(itemValue) => setMedicineType(itemValue)}
+                    />
+                  </View>
+                </FormControl>
+              </View>
+              <View style={{ marginHorizontal: 25, marginTop: 10 }}>
+                <FormControl w="100%">
+                  <FormControl.Label>
+                    For How Long You Gonna Take?
+                  </FormControl.Label>
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      width: "100%",
+                      // paddingHorizontal: 10,
+                    }}
+                  >
+                    <ReminderInputForm
+                      type="dose"
+                      placeholder={"How Long"}
+                      icon={
+                        <FontAwesome5
+                          name="business-time"
+                          size={24}
+                          color="#9B9B9B"
+                        />
+                      }
+                    />
+                    <ReminderSelectInput
+                      medicineType={medicineType}
+                      onValueChange={(itemValue) => setMedicineType(itemValue)}
+                    />
+                  </View>
+                </FormControl>
+              </View>
+              <View style={{ marginHorizontal: 25, marginTop: 10 }}>
+                <FormControl w="100%">
+                  <FormControl.Label>
+                    How often do you take this medicine?
+                  </FormControl.Label>
+                </FormControl>
+              </View>
+            </View>
+          </Actionsheet.Content>
+        </Actionsheet>
       </View>
     </View>
   );
