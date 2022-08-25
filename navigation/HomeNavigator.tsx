@@ -31,7 +31,21 @@ export default function HomeNavigator() {
         options={{ headerShown: true }}
         name="diagnosis"
       />
-      <Stack.Screen component={SettingsScreen} name="settings" />
+      <Stack.Screen
+        component={SettingsScreen}
+        name="settings"
+        options={{
+          headerShown: true,
+          header: (props) => (
+            <CustomHeader
+              navigation={""}
+              type="library"
+              title={"Settings"}
+              {...props}
+            />
+          ),
+        }}
+      />
       <Stack.Screen component={HealthLibraryScreen} name="healthLibrary" />
       <Stack.Screen
         component={ArticlesScreen}

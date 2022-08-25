@@ -39,8 +39,8 @@ export default function MedicineReminderScreen() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
   const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
+    { label: "Monday", value: "Monday" },
+    { label: "Tuesday", value: "Tuesday" },
   ]);
 
   const [date, setDate] = useState(new Date());
@@ -176,6 +176,7 @@ export default function MedicineReminderScreen() {
                   </TouchableOpacity>
                   <DatePicker
                     modal
+                    mode="time"
                     open={open1}
                     date={date}
                     onConfirm={(date) => {

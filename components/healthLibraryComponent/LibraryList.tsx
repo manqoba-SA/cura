@@ -9,9 +9,7 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/COLORS";
-import { Poppins_300Light } from "@expo-google-fonts/poppins";
-import { useNavigation } from "@react-navigation/native";
-import SearchableSectionList from "./SearchableSectionList";
+import { AntDesign } from "@expo/vector-icons";
 
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, description, onPress }) => (
@@ -26,7 +24,7 @@ const Item = ({ name, description, onPress }) => (
       </Text>
     </View>
     <View>
-      <Ionicons name="md-enter-outline" size={35} color="black" />
+      <AntDesign name="right" size={25} color="black" />
     </View>
   </TouchableOpacity>
 );
@@ -118,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#fff",
-    padding: 24,
+    padding: 20,
     borderRadius: 10,
   },
   title: {
