@@ -8,6 +8,8 @@ import { Fontisto } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-date-picker";
+import { Poppins_400Regular } from "@expo-google-fonts/poppins";
+import CustomButton from "../../CustomButtons/CustomButton";
 
 export default function ReminderActionSheet({ isOpen, onClose }) {
   let [medicineType, setMedicineType] = useState("pills");
@@ -24,11 +26,16 @@ export default function ReminderActionSheet({ isOpen, onClose }) {
     <Actionsheet isOpen={isOpen} onClose={onClose}>
       <Actionsheet.Content bg={"#fff"}>
         <View>
-          <Text style={{ fontFamily: "Poppins_600SemiBold", fontSize: 20 }}>
-            Add Plan
-          </Text>
+          <Text style={styles.addPlanText}>Add Plan</Text>
         </View>
-        <View style={{ marginHorizontal: 20, width: "100%" }}>
+        <View
+          style={{
+            marginHorizontal: 20,
+            width: "100%",
+            alignContent: "center",
+            marginBottom: 15,
+          }}
+        >
           <View style={{ marginHorizontal: 25 }}>
             <FormControl w="100%">
               <FormControl.Label>Pill/Medicine Name</FormControl.Label>
@@ -129,8 +136,17 @@ export default function ReminderActionSheet({ isOpen, onClose }) {
             <FormControl w="100%">
               <FormControl.Label>Notification</FormControl.Label>
 
-              <TouchableOpacity onPress={() => setOpen1(true)}>
-                <Text>Click</Text>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#F8F8F6",
+                  borderWidth: 0,
+                  borderRadius: 14,
+
+                  padding: 12,
+                }}
+                onPress={() => setOpen1(true)}
+              >
+                <Text style={{ fontFamily: "Poppins_400Regular" }}>Click</Text>
               </TouchableOpacity>
               <DatePicker
                 modal
@@ -147,10 +163,17 @@ export default function ReminderActionSheet({ isOpen, onClose }) {
               />
             </FormControl>
           </View>
+          <View style={{ marginHorizontal: 25, marginVertical: 15 }}>
+            <FormControl w="100%">
+              <CustomButton onPress={() => console.log("hello")} text="Done" />
+            </FormControl>
+          </View>
         </View>
       </Actionsheet.Content>
     </Actionsheet>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  addPlanText: { fontFamily: "Poppins_600SemiBold", fontSize: 20 },
+});
