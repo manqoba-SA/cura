@@ -28,7 +28,14 @@ export default function HomeNavigator() {
       />
       <Stack.Screen
         component={DiagnoseScreen}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: true,
+          title: "",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
         name="diagnosis"
       />
       <Stack.Screen

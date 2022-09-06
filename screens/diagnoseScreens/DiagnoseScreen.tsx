@@ -1,10 +1,91 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
+import {
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
+import disc from "@jsamr/counter-style/presets/disc";
+import MarkedList from "@jsamr/react-native-li";
+import { Checkbox } from "native-base";
+import CustomButton from "../../components/CustomButtons/CustomButton";
 
 export default function DiagnoseScreen() {
+  const [groupValues, setGroupValues] = React.useState([]);
+  const terms = [
+    {
+      id: 1,
+      title: "This is not a real diagnosis, is a checkup.",
+      description:
+        "Checkup is for informational purposes and is not qualified medical opinion.",
+    },
+    {
+      id: 2,
+      title: "Do not use in emeegencies",
+      description:
+        "In case of health emergency, call your local emergency number immediately.",
+    },
+    {
+      id: 3,
+      title: "Your data is safe.",
+      description:
+        "Information that you provide is anonymous and not shared with anyone",
+    },
+  ];
   return (
-    <View>
-      <Text>DiagnoseScreen</Text>
+    <View style={styles.container}>
+      <View style={styles.wrapper}>
+        <Text style={styles.textHeader}>Terms of Service</Text>
+        <Text style={styles.lighterText}>
+          Please read the Terms of Service before using the checkup. Keep in
+          mind that:
+        </Text>
+        <MarkedList counterRenderer={disc}>
+          {terms.map((term, index) => (
+            <View key={index}>
+              <Text style={styles.darkText}>{term.title}</Text>
+              <Text style={styles.lighterText}>{term.description}</Text>
+            </View>
+          ))}
+        </MarkedList>
+        <Checkbox.Group
+          onChange={setGroupValues}
+          value={groupValues}
+          accessibilityLabel="choose numbers"
+        >
+          <Checkbox value="one" my={2}>
+            I read and accept Terms of Services and Private Policy.
+          </Checkbox>
+          <Checkbox value="two">
+            I consert to curaHealth using any personal health data I voluntarily
+            share....
+          </Checkbox>
+        </Checkbox.Group>
+      </View>
+      <View style={styles.btnWrapper}>
+        <CustomButton
+          text={"Continue"}
+          onPress={() => console.log("next page")}
+        />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { backgroundColor: "#fff", flex: 1.0 },
+  wrapper: { flex: 2, marginHorizontal: 15, marginTop: 15 },
+  textHeader: { fontSize: 20, fontFamily: "Poppins_600SemiBold" },
+  lighterText: {
+    fontSize: 15,
+    fontFamily: "Poppins_400Regular",
+    color: "#666666",
+  },
+  darkText: { fontSize: 15, fontFamily: "Poppins_600SemiBold" },
+  btnWrapper: {
+    flex: 1,
+    right: 15,
+    left: 15,
+    position: "absolute",
+    bottom: 15,
+  },
+});
