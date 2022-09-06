@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import CustomButton from "../../components/CustomButtons/CustomButton";
 
-export default function ThirdDiagnoseScreen() {
+export default function ThirdDiagnoseScreen({ navigation }) {
   const image = require("../../assets/images/illustrations/symptoms.png");
   return (
     <View style={styles.container}>
@@ -18,7 +18,7 @@ export default function ThirdDiagnoseScreen() {
       <View style={styles.btnsWrapper}>
         <CustomButton
           text={"Type Symptoms"}
-          onPress={() => navigation.navigate("SecondDiagnosis")}
+          onPress={() => navigation.navigate("AddSymptoms")}
         />
         <CustomButton
           text={"Voice Symptoms"}

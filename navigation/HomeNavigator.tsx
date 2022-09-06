@@ -13,6 +13,7 @@ import COLORS from "../constants/COLORS";
 import ArticleDetailsScreen from "../screens/articlesScreens/ArticleDetailsScreen";
 import SecondDiagnoseScreen from "../screens/diagnoseScreens/SecondDiagnoseScreen";
 import ThirdDiagnoseScreen from "../screens/diagnoseScreens/ThirdDiagnoseScreen";
+import AddSymptomsScreen from "../screens/diagnoseScreens/AddSymptomsScreen";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
@@ -63,6 +64,18 @@ export default function HomeNavigator() {
           },
         }}
         name="ThirdDiagnosis"
+      />
+      <Stack.Screen
+        component={AddSymptomsScreen}
+        options={{
+          headerShown: true,
+          title: "",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="AddSymptoms"
       />
       <Stack.Screen
         component={SettingsScreen}
