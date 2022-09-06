@@ -9,7 +9,7 @@ import MarkedList from "@jsamr/react-native-li";
 import { Checkbox } from "native-base";
 import CustomButton from "../../components/CustomButtons/CustomButton";
 
-export default function DiagnoseScreen() {
+export default function DiagnoseScreen({ navigation }) {
   const [groupValues, setGroupValues] = React.useState([]);
   const terms = [
     {
@@ -39,32 +39,43 @@ export default function DiagnoseScreen() {
           Please read the Terms of Service before using the checkup. Keep in
           mind that:
         </Text>
-        <MarkedList counterRenderer={disc}>
-          {terms.map((term, index) => (
-            <View key={index}>
-              <Text style={styles.darkText}>{term.title}</Text>
-              <Text style={styles.lighterText}>{term.description}</Text>
-            </View>
-          ))}
-        </MarkedList>
-        <Checkbox.Group
-          onChange={setGroupValues}
-          value={groupValues}
-          accessibilityLabel="choose numbers"
-        >
-          <Checkbox value="one" my={2}>
-            I read and accept Terms of Services and Private Policy.
-          </Checkbox>
-          <Checkbox value="two">
-            I consert to curaHealth using any personal health data I voluntarily
-            share....
-          </Checkbox>
-        </Checkbox.Group>
+        <View style={styles.listWrapper}>
+          <MarkedList
+            counterRenderer={disc}
+            markerBoxStyle={{ paddingVertical: 12 }}
+          >
+            {terms.map((term, index) => (
+              <View key={index}>
+                <Text style={styles.darkTextSemiBold}>{term.title}</Text>
+                <Text style={styles.lighterText}>{term.description}</Text>
+              </View>
+            ))}
+          </MarkedList>
+        </View>
+        <View>
+          <Checkbox.Group
+            onChange={setGroupValues}
+            value={groupValues}
+            accessibilityLabel="choose numbers"
+          >
+            <Checkbox value="one" my={2}>
+              <Text style={styles.darkText}>
+                I read and accept Terms of Services and Private Policy.
+              </Text>
+            </Checkbox>
+            <Checkbox value="two">
+              <Text style={styles.darkText}>
+                I consert to curaHealth using any personal health data I
+                voluntarily share....
+              </Text>
+            </Checkbox>
+          </Checkbox.Group>
+        </View>
       </View>
       <View style={styles.btnWrapper}>
         <CustomButton
           text={"Continue"}
-          onPress={() => console.log("next page")}
+          onPress={() => navigation.navigate("SecondDiagnosis")}
         />
       </View>
     </View>
@@ -73,19 +84,33 @@ export default function DiagnoseScreen() {
 
 const styles = StyleSheet.create({
   container: { backgroundColor: "#fff", flex: 1.0 },
-  wrapper: { flex: 2, marginHorizontal: 15, marginTop: 15 },
+  wrapper: {
+    flex: 1,
+    marginHorizontal: 15,
+    marginTop: 15,
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
   textHeader: { fontSize: 20, fontFamily: "Poppins_600SemiBold" },
   lighterText: {
     fontSize: 15,
     fontFamily: "Poppins_400Regular",
     color: "#666666",
   },
-  darkText: { fontSize: 15, fontFamily: "Poppins_600SemiBold" },
+  darkTextSemiBold: {
+    fontSize: 15,
+    fontFamily: "Poppins_600SemiBold",
+    marginTop: 15,
+  },
   btnWrapper: {
     flex: 1,
     right: 15,
     left: 15,
     position: "absolute",
     bottom: 15,
+  },
+  darkText: { fontSize: 15, fontFamily: "Poppins_400Regular" },
+  listWrapper: {
+    marginTop: 15,
   },
 });

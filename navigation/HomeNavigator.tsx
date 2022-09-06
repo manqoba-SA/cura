@@ -11,6 +11,7 @@ import MedicineReminderScreen from "../screens/medicineReminder/MedicineReminder
 import ArticlesScreen from "../screens/articlesScreens/ArticlesScreen";
 import COLORS from "../constants/COLORS";
 import ArticleDetailsScreen from "../screens/articlesScreens/ArticleDetailsScreen";
+import SecondDiagnoseScreen from "../screens/diagnoseScreens/SecondDiagnoseScreen";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
@@ -37,6 +38,18 @@ export default function HomeNavigator() {
           },
         }}
         name="diagnosis"
+      />
+      <Stack.Screen
+        component={SecondDiagnoseScreen}
+        options={{
+          headerShown: true,
+          title: "",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="SecondDiagnosis"
       />
       <Stack.Screen
         component={SettingsScreen}

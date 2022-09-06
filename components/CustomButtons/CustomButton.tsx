@@ -1,5 +1,12 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import COLORS from "../../constants/COLORS";
 
 export default function CustomButton({
@@ -10,7 +17,7 @@ export default function CustomButton({
   fgColor,
 }) {
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={onPress}
       style={[
         styles.container,
@@ -27,7 +34,7 @@ export default function CustomButton({
       >
         {text}
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
