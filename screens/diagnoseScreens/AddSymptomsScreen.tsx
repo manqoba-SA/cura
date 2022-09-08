@@ -11,7 +11,7 @@ import COLORS from "../../constants/COLORS";
 import locationSymptoms from "../../constants/dummyData/locationSymptoms";
 import { AntDesign } from "@expo/vector-icons";
 const { width, height } = Dimensions.get("window");
-export default function AddSymptomsScreen() {
+export default function AddSymptomsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -35,7 +35,7 @@ export default function AddSymptomsScreen() {
             {locationSymptoms.map((symptom) => (
               <TouchableOpacity style={[styles.addBtn, styles.symptomsBtns]}>
                 <View style={styles.dFlex}>
-                  <AntDesign name="plus" size={20} color="#2266EA" />
+                  <AntDesign name="plus" size={15} color="#2266EA" />
                   <Text style={styles.btnText}>{symptom.title}</Text>
                 </View>
               </TouchableOpacity>
@@ -46,7 +46,7 @@ export default function AddSymptomsScreen() {
       <View style={styles.btnsWrapper}>
         <CustomButton
           text={"Continue"}
-          onPress={() => navigation.navigate("ThirdDiagnosis")}
+          onPress={() => navigation.navigate("AssessmentScreen")}
         />
       </View>
     </View>
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 15,
     marginTop: 15,
-    // backgroundColor: "#555555",
   },
   textHeader: { fontSize: 20, fontFamily: "Poppins_600SemiBold" },
   lighterText: {
@@ -103,6 +102,8 @@ const styles = StyleSheet.create({
   },
   dFlex: {
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnText: {
     color: COLORS.primary.text,
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   sysmptomsLocationTagsWrap: {
+    marginTop: 10,
     flexDirection: "row",
     flexWrap: "wrap",
   },
