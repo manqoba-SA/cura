@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 import * as Progress from "react-native-progress";
 import COLORS from "../../constants/COLORS";
 
-export default function NoticeScreen() {
+export default function NoticeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -17,6 +17,9 @@ export default function NoticeScreen() {
           Please remember that this is not a medical diagnosis. In case of
           doubt, it's always best to consult a doctor
         </Text>
+        <Pressable onPress={() => navigation.navigate("ReportScreen")}>
+          <Text>Presss</Text>
+        </Pressable>
       </View>
     </View>
   );
