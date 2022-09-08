@@ -17,6 +17,10 @@ import AddSymptomsScreen from "../screens/diagnoseScreens/AddSymptomsScreen";
 import AssessmentScreen from "../screens/diagnoseScreens/AssessmentScreen";
 import NoticeScreen from "../screens/diagnoseScreens/NoticeScreen";
 import ReportScreen from "../screens/diagnoseScreens/resultsScreens/ReportScreen";
+import HerbsScreen from "../screens/diagnoseScreens/resultsScreens/herbsScreens/HerbsScreen";
+import HomeRemediesScreen from "../screens/diagnoseScreens/resultsScreens/homeRemedyScreens/HomeRemediesScreen";
+import DoctorsScreen from "../screens/diagnoseScreens/resultsScreens/doctorScreens/DoctorsScreen";
+import CauseScreen from "../screens/diagnoseScreens/resultsScreens/CauseScreen";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
@@ -94,6 +98,54 @@ export default function HomeNavigator() {
       />
       <Stack.Screen component={NoticeScreen} name="NoticeScreen" />
       <Stack.Screen component={ReportScreen} name="ReportScreen" />
+      <Stack.Screen
+        component={CauseScreen}
+        options={{
+          headerShown: true,
+          title: "Influenza Flu",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="CauseScreen"
+      />
+      <Stack.Screen
+        component={HomeRemediesScreen}
+        options={{
+          headerShown: true,
+          title: "Home Remedies",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="HomeRemediesScreen"
+      />
+      <Stack.Screen
+        component={HerbsScreen}
+        options={{
+          headerShown: true,
+          title: "Herbs",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="HerbsScreen"
+      />
+      <Stack.Screen
+        component={DoctorsScreen}
+        options={{
+          headerShown: true,
+          title: "Doctors",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="DoctorsScreen"
+      />
       <Stack.Screen
         component={SettingsScreen}
         name="settings"

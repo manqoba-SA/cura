@@ -13,8 +13,9 @@ import {
 } from "@expo-google-fonts/poppins";
 import COLORS from "../../../constants/COLORS";
 import CustomButton from "../../../components/CustomButtons/CustomButton";
+import navigationTheme from "../../../navigation/navigationTheme";
 
-export default function ReportScreen() {
+export default function ReportScreen({ navigation }) {
   const remedyImg = require("../../../../cura/assets/images/illustrations/cup_of_tea.png");
   const herbsImg = require("../../../../cura/assets/images/illustrations/herbs.png");
   const doctorImg = require("../../../../cura/assets/images/illustrations/doctor.png");
@@ -38,7 +39,10 @@ export default function ReportScreen() {
             <Text style={styles.lighterText}>
               9 out of 10 people with these symptoms had this condition
             </Text>
-            <TouchableOpacity style={styles.boxBtn}>
+            <TouchableOpacity
+              style={styles.boxBtn}
+              onPress={() => navigation.navigate("CauseScreen")}
+            >
               <Text style={styles.btnText}>Tell me more</Text>
             </TouchableOpacity>
           </View>
@@ -72,7 +76,10 @@ export default function ReportScreen() {
           </Text>
           <View style={styles.sicknessBox}>
             <Text style={styles.boxTitle}>Home Remedies</Text>
-            <View style={styles.boxWrapper}>
+            <TouchableOpacity
+              style={styles.boxWrapper}
+              onPress={() => navigation.navigate("HomeRemediesScreen")}
+            >
               <Image
                 source={remedyImg}
                 style={styles.boxImage}
@@ -83,9 +90,12 @@ export default function ReportScreen() {
                 home remedies. If you are interested, click and please try them
                 out
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
-          <View style={styles.sicknessBox}>
+          <TouchableOpacity
+            style={styles.sicknessBox}
+            onPress={() => navigation.navigate("HerbsScreen")}
+          >
             <Text style={styles.boxTitle}>Try Herbs</Text>
             <View style={styles.boxWrapper}>
               <Image
@@ -98,8 +108,11 @@ export default function ReportScreen() {
                 herbs. If you are interested, click and please try them out
               </Text>
             </View>
-          </View>
-          <View style={styles.sicknessBox}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.sicknessBox}
+            onPress={() => navigation.navigate("DoctorsScreen")}
+          >
             <Text style={styles.boxTitle}>Speak to a doctor</Text>
             <View style={styles.boxWrapper}>
               <Image
@@ -113,7 +126,7 @@ export default function ReportScreen() {
                 you to speak with a doctor
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.lastPart}>
