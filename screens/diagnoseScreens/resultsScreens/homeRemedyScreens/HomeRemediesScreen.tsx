@@ -10,7 +10,7 @@ import React from "react";
 import COLORS from "../../../../constants/COLORS";
 import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
 
-export default function HomeRemediesScreen() {
+export default function HomeRemediesScreen({ navigation }) {
   const teaImage = require("../../../../../cura/assets/images/honeyTea.jpg");
   return (
     <View style={styles.container}>
@@ -27,7 +27,10 @@ export default function HomeRemediesScreen() {
             <Text style={[styles.remedyDescription, styles.marginText]}>
               According to some research, honey may relieve coughs
             </Text>
-            <TouchableOpacity style={styles.boxBtn}>
+            <TouchableOpacity
+              style={styles.boxBtn}
+              onPress={() => navigation.navigate("RemedyDetailScreen")}
+            >
               <Text style={styles.btnText}>Tell me more</Text>
             </TouchableOpacity>
           </View>
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   remedyImage: {
-    resizeMode: "contain",
+    // resizeMode: "contain",
     borderRadius: 16,
     width: 144,
     height: 136,
