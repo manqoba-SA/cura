@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 15,
     marginTop: 15,
-    // backgroundColor: "#555555",
   },
   textHeader: { fontSize: 20, fontFamily: "Poppins_600SemiBold" },
   lighterText: {

@@ -88,8 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 15,
     marginTop: 15,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   textHeader: { fontSize: 20, fontFamily: "Poppins_600SemiBold" },
   lighterText: {

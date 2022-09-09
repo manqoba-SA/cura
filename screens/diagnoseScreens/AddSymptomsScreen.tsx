@@ -17,7 +17,6 @@ export default function AddSymptomsScreen({ navigation }) {
       <View style={styles.wrapper}>
         <Text style={styles.textHeader}>Symptoms</Text>
         <Text style={styles.lighterText}>Please specify your symptoms</Text>
-        {/* <View style={styles.centerWrap}> */}
         <View style={styles.sysmptomsBox}>
           <Text>nnjjn</Text>
         </View>

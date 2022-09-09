@@ -7,13 +7,8 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import {
-  Poppins_400Regular,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
 import COLORS from "../../../constants/COLORS";
 import CustomButton from "../../../components/CustomButtons/CustomButton";
-import navigationTheme from "../../../navigation/navigationTheme";
 
 export default function ReportScreen({ navigation }) {
   const remedyImg = require("../../../../cura/assets/images/illustrations/cup_of_tea.png");

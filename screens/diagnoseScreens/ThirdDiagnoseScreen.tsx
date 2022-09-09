@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     flex: 1.0,
     marginHorizontal: 15,
     marginTop: 15,
-    // backgroundColor: "#555555",
   },
   textHeader: { fontSize: 20, fontFamily: "Poppins_600SemiBold" },
   lighterText: {
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
     color: "#666666",
   },
   btnsWrapper: {
-    // flex: 2,
     right: 15,
     left: 15,
     position: "absolute",
