@@ -22,6 +22,7 @@ import HomeRemediesScreen from "../screens/diagnoseScreens/resultsScreens/homeRe
 import DoctorsScreen from "../screens/diagnoseScreens/resultsScreens/doctorScreens/DoctorsScreen";
 import CauseScreen from "../screens/diagnoseScreens/resultsScreens/CauseScreen";
 import RemedyDetailScreen from "../screens/diagnoseScreens/resultsScreens/homeRemedyScreens/RemedyDetailScreen";
+import DoctorDetailsScreen from "../screens/diagnoseScreens/resultsScreens/doctorScreens/DoctorDetailsScreen";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
@@ -136,6 +137,18 @@ export default function HomeNavigator() {
         name="HerbsScreen"
       />
       <Stack.Screen
+        component={RemedyDetailScreen}
+        options={{
+          headerShown: true,
+          title: "Honey Tea",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        name="RemedyDetailScreen"
+      />
+      <Stack.Screen
         component={DoctorsScreen}
         options={{
           headerShown: true,
@@ -148,16 +161,16 @@ export default function HomeNavigator() {
         name="DoctorsScreen"
       />
       <Stack.Screen
-        component={RemedyDetailScreen}
+        component={DoctorDetailsScreen}
         options={{
           headerShown: true,
-          title: "Honey Tea",
+          title: "",
           headerShadowVisible: false,
           headerStyle: {
             backgroundColor: "#fff",
           },
         }}
-        name="RemedyDetailScreen"
+        name="DoctorDetailsScreen"
       />
       <Stack.Screen
         component={SettingsScreen}

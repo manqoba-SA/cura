@@ -1,14 +1,23 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import CustomSearchBar from "../../../../components/CustomSearchBar/CustomSearchBar";
 import doctors from "../../../../constants/dummyData/doctors";
+import { Fontisto } from "@expo/vector-icons";
+import navigationTheme from "../../../../navigation/navigationTheme";
 
-export default function DoctorsScreen() {
+export default function DoctorsScreen({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <CustomSearchBar
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
@@ -18,14 +27,25 @@ export default function DoctorsScreen() {
       <View style={styles.content}>
         <View style={styles.doctors}>
           {doctors.map((doctor) => (
-            <TouchableOpacity style={styles.box}>
-              <Text>{doctor.name}</Text>
-              <Text>{doctor.title}</Text>
+            <TouchableOpacity
+              key={doctor.id}
+              style={styles.box}
+              onPress={() =>
+                navigation.navigate("DoctorDetailsScreen", { id: doctor.id })
+              }
+            >
+              <Image source={doctor.image} style={styles.doctorImage} />
+              <Text style={styles.doctorName}>Dr. {doctor.name}</Text>
+              <Text style={styles.doctorTitle}>{doctor.title}</Text>
+              <Text style={styles.doctorTitle}>
+                <Fontisto name="doctor" size={15} color="#409849" />
+                Patients: {doctor.customers}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -49,5 +69,20 @@ const styles = StyleSheet.create({
     width: "45%",
     // marginHorizontal: 4,
     marginVertical: 10,
+  },
+  doctorImage: {
+    width: 78.16,
+    height: 78.16,
+    borderRadius: 50,
+  },
+  doctorName: {
+    marginTop: 5,
+    fontFamily: "Poppins_400Regular",
+    fontSize: 17,
+    color: "#0A0909",
+  },
+  doctorTitle: {
+    color: "#666666",
+    fontFamily: "Poppins_400Regular",
   },
 });
