@@ -31,7 +31,7 @@ export default function ShopNavigator() {
           title: "",
           headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: "#fff",
+            backgroundColor: "#E5E5E5",
           },
         }}
         name="ProductDetailScreen"
