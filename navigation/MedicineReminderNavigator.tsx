@@ -10,7 +10,7 @@ export default function MedicineReminderNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         component={MedicineReminderScreen}
-        name="medineReminderScreen"
+        name="reminder"
         options={{
           headerShown: true,
           header: (props) => (

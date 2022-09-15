@@ -7,6 +7,7 @@ export default function CustomSearchBar({
   searchPhrase,
   setSearchPhrase,
   setCLicked,
+  placeholder,
 }) {
   return (
     <View style={styles.container}>
@@ -25,7 +26,7 @@ export default function CustomSearchBar({
         {/* Input field */}
         <TextInput
           style={styles.input}
-          placeholder="Seach topic or Condition"
+          placeholder={placeholder}
           value={searchPhrase}
           onChangeText={setSearchPhrase}
           onFocus={() => {

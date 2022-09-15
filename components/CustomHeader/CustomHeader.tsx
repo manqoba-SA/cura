@@ -10,6 +10,9 @@ import COLORS from "../../constants/COLORS";
 import { Icon } from "@iconify/react";
 import settingsIcon from "@iconify/icons-arcticons/settings";
 import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function CustomHeader({ navigation, title, type = "default" }) {
   const { width, height } = Dimensions.get("window");
@@ -51,9 +54,38 @@ export default function CustomHeader({ navigation, title, type = "default" }) {
           {type === "library" ? (
             <Text>{""}</Text>
           ) : (
-            <TouchableOpacity onPress={() => navigation.navigate("settings")}>
-              <Ionicons name="settings-outline" size={35} color="#A1A3AB" />
-            </TouchableOpacity>
+            <>
+              {type === "shop" ? (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("settings")}
+                    style={{ marginRight: 15 }}
+                  >
+                    <MaterialIcons
+                      name="favorite-outline"
+                      size={30}
+                      color="#409849"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("settings")}
+                  >
+                    <AntDesign name="shoppingcart" size={30} color="#409849" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("settings")}
+                >
+                  <Ionicons name="settings-outline" size={35} color="#A1A3AB" />
+                </TouchableOpacity>
+              )}
+            </>
           )}
         </View>
       </View>

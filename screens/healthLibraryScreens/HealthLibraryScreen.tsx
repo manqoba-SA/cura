@@ -31,6 +31,7 @@ export default function HealthLibraryScreen({ navigation }) {
           setSearchPhrase={setSearchPhrase}
           clicked={clicked}
           setCLicked={setClicked}
+          placeholder="Seach topic or Condition"
         />
 
         <LibraryList

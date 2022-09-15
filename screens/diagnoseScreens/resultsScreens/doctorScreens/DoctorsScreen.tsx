@@ -23,6 +23,7 @@ export default function DoctorsScreen({ navigation }) {
         setSearchPhrase={setSearchPhrase}
         clicked={clicked}
         setCLicked={setClicked}
+        placeholder="Search Doctor"
       />
       <View style={styles.content}>
         <View style={styles.doctors}>

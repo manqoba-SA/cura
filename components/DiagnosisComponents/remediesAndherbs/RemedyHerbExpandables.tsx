@@ -94,17 +94,4 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     backgroundColor: "#E5E5E5",
   },
-  ingredientName: {
-    color: COLORS.primary.text,
-    fontFamily: "Poppins_600SemiBold",
-    fontSize: 15,
-    padding: 5,
-    lineHeight: 20,
-  },
-  ingredientImage: {
-    borderRadius: 14,
-    width: 326.76,
-    height: 85.92,
-    resizeMode: "cover",
-  },
 });

@@ -58,7 +58,7 @@ export default function Home({ navigation }) {
             image={images.healthLibrary}
           />
           <CustomBox
-            onPress={() => navigation.navigate("medineReminderScreen")}
+            onPress={() => navigation.navigate("reminder")}
             title={"Medicine\nReminder"}
             type="half"
             subtitle={""}
