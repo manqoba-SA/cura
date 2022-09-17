@@ -62,9 +62,9 @@ export default function ProductDetailScreen({ route }) {
             <View style={styles.productDescriptionWrap}>
               <Text style={styles.TextHeader}>SELECT SIZE</Text>
               <View style={styles.productSizes}>
-                {data.sizes.map((size) => {
+                {data?.sizes?.map((size) => {
                   <View key={size.id}>
-                    <Text>{size.size}</Text>
+                    <Text>{size.name}</Text>
                   </View>;
                 })}
               </View>

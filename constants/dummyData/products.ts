@@ -8,10 +8,10 @@ const products = [
     image: require("../../assets/images/products/noonbrew.jpg"),
     rating: 5,
     sizes: [
-      { id: 1, size: "20 g" },
-      { id: 2, size: "50 g" },
-      { id: 3, size: "100 g" },
-      { id: 4, size: "100 g" },
+      { id: 1, name: "20 g" },
+      { id: 2, name: "50 g" },
+      { id: 3, name: "100 g" },
+      { id: 4, name: "100 g" },
     ],
   },
   {
@@ -33,9 +33,9 @@ const products = [
     image: require("../../assets/images/honey.jpg"),
     rating: 2,
     sizes: [
-      { id: 1, size: "2kg" },
-      { id: 2, size: "5kg" },
-      { id: 3, size: "10kg" },
+      { id: 1, name: "2kg" },
+      { id: 2, name: "5kg" },
+      { id: 3, name: "10kg" },
     ],
   },
   {

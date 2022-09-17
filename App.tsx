@@ -34,7 +34,7 @@ import { extendTheme, NativeBaseProvider } from "native-base";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState("manqoba");
+  const [user, setUser] = useState(null);
   let [fontsLoaded] = useFonts({
     Poppins_100Thin,
     Poppins_100Thin_Italic,
