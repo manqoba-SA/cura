@@ -1,16 +1,16 @@
+import { FormControl } from "native-base";
 import React, { useState } from "react";
 import {
-  Image,
-  ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
-import Logo from "../../assets/images/illustrations/undraw_doctors_hwty.png";
 import CustomButton from "../../components/CustomButtons/CustomButton";
 import CustomInput from "../../components/CustomInputs/CustomInput";
-import COLORS from "../../constants/COLORS";
+import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -20,65 +20,98 @@ export default function LoginScreen() {
     console.warn("Sign In");
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Image
-          source={Logo}
-          style={[styles.logo, { height: height * 0.3 }]}
-          resizeMode="contain"
-        />
-        <CustomInput
-          placeholder={"Email Address"}
-          value={email}
-          setValue={setEmail}
-          secureTextEntry={false}
-        />
-        <CustomInput
-          placeholder={"Password"}
-          value={password}
-          setValue={setPassword}
-          secureTextEntry={true}
-        />
-        <CustomButton onPress={onSignInPress} text="Login" />
-        <CustomButton
-          onPress={onSignInPress}
-          text="I forgot my password"
-          type="tertiary"
-        />
-        <Text style={{ marginHorizontal: 10 }}>or continue with</Text>
-        <CustomButton
-          onPress={onSignInPress}
-          text="Sign In with Facebook"
-          bgColor={"#E7EAF4"}
-          fgColor={"#4765A9"}
-        />
-        <CustomButton
-          onPress={onSignInPress}
-          text="Sign In with Google"
-          bgColor={"#FAE9EA"}
-          fgColor={"#DD4D44"}
-        />
-        <CustomButton
-          onPress={onSignInPress}
-          text="Sign In with Apple"
-          bgColor={"#e3e3e3"}
-          fgColor={"#363636"}
-        />
+    <View style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.contentContainer}>
+        <Text style={styles.headerText}>Log In Your Account</Text>
+        <Text style={styles.descriptionText}>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry.
+        </Text>
+        <View style={styles.formsWrapper}>
+          <FormControl w="100%">
+            <FormControl.Label>Email Address</FormControl.Label>
+            <CustomInput
+              placeholder={"Email Address"}
+              value={email}
+              setValue={setEmail}
+              secureTextEntry={false}
+            />
+          </FormControl>
+          <FormControl w="100%">
+            <FormControl.Label>Password</FormControl.Label>
+            <CustomInput
+              placeholder={"Password"}
+              value={email}
+              setValue={setEmail}
+              secureTextEntry={false}
+            />
+          </FormControl>
+        </View>
+        <View style={styles.btnWrapper}>
+          <CustomButton
+            text="Sign In"
+            onPress={() => console.log("Make Account")}
+          />
+          <View style={styles.orTextWrapper}>
+            <Text style={styles.descriptionText}>or sign up with</Text>
+          </View>
+          <View style={styles.socialsWrapper}>
+            <TouchableOpacity style={styles.socialIcon}>
+              <MaterialIcons name="facebook" size={34} color="#18ACFE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialIcon}>
+              <AntDesign name="apple1" size={30} color="#283544" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialIcon}>
+              <AntDesign name="google" size={30} color="#EB4335" />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: COLORS.light.background,
-    marginVertical: 10,
+  container: {
+    backgroundColor: "#fff",
+    flex: 1.0,
   },
-  logo: {
-    width: "70%",
-    maxWidth: 300,
-    maxHeight: 200,
+  contentContainer: {
+    marginTop: 20,
+    marginHorizontal: 15,
+    flex: 1.0,
+  },
+  headerText: {
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 20,
+  },
+  descriptionText: {
+    color: "#5B5B5B",
+    fontSize: 15,
+  },
+  formsWrapper: {
+    marginTop: 20,
+  },
+  btnWrapper: {
+    marginTop: 20,
+    right: 15,
+    left: 15,
+    position: "absolute",
+    bottom: 75,
+  },
+  orTextWrapper: {
+    marginTop: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  socialsWrapper: {
+    marginTop: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  socialIcon: {
+    marginHorizontal: 5,
   },
 });

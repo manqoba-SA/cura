@@ -1,16 +1,19 @@
 import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
-import { FormControl } from "native-base";
-import React, { useState } from "react";
+import { FormControl, KeyboardAvoidingView } from "native-base";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomButton from "../../components/CustomButtons/CustomButton";
 import CustomInput from "../../components/CustomInputs/CustomInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import { AvoidSoftInput } from "react-native-avoid-softinput";
 
 export default function RegisterScreen() {
   const [email, setEmail] = useState("");
   return (
     <View style={styles.container}>
+      {/* <KeyboardAvoidingView behavior="position"> */}
       <View style={styles.contentContainer}>
         <Text style={styles.headerText}>Create your account</Text>
         <Text style={styles.descriptionText}>
@@ -77,7 +80,8 @@ const styles = StyleSheet.create({
     flex: 1.0,
   },
   contentContainer: {
-    marginHorizontal: 15,
+    marginHorizontal: 25,
+    flex: 1.0,
   },
   headerText: {
     fontFamily: "Poppins_600SemiBold",
@@ -92,6 +96,11 @@ const styles = StyleSheet.create({
   },
   btnWrapper: {
     marginTop: 20,
+    // flex: 1,
+    right: 15,
+    left: 15,
+    position: "absolute",
+    bottom: 75,
   },
   orTextWrapper: {
     marginTop: 5,

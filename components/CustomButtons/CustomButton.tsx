@@ -15,6 +15,7 @@ export default function CustomButton({
   type = "primary",
   bgColor,
   fgColor,
+  disabled = false,
 }) {
   return (
     <TouchableOpacity
@@ -23,7 +24,9 @@ export default function CustomButton({
         styles.container,
         styles[`container_${type}`],
         bgColor ? { backgroundColor: bgColor } : {},
+        !disabled ? {} : { backgroundColor: "#9FCEA4" },
       ]}
+      disabled={disabled}
     >
       <Text
         style={[

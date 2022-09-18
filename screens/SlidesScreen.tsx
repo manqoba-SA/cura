@@ -94,7 +94,7 @@ export default function SlidesScreen({ navigation }) {
             <View style={{ height: 100 }}>
               <TouchableOpacity
                 style={styles.btn}
-                onPress={() => navigation.navigate("Register")}
+                onPress={() => navigation.navigate("TermsAndConditionsScreen")}
               >
                 <Text
                   style={{ color: "#fff", fontWeight: "bold", fontSize: 15 }}
