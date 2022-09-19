@@ -11,14 +11,39 @@ import CustomButton from "../../components/CustomButtons/CustomButton";
 import CustomInput from "../../components/CustomInputs/CustomInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { login } from "../../redux/features/userSlice";
+import { useDispatch } from "react-redux";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navihation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { height } = useWindowDimensions();
-  const onSignInPress = () => {
-    console.warn("Sign In");
+  const dispatch = useDispatch();
+  const onSignInPress = (e) => {
+    e.preventDefault();
+
+    // Sign in an existing user with Firebase
+    signInWithEmailAndPassword(auth, email, password)
+      // returns  an auth object after a successful authentication
+      // userAuth.user contains all our user details
+      .then((userAuth) => {
+        // store the user's information in the redux state
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+          })
+        );
+        navihation.navigate("home");
+      })
+      // display the error if any
+      .catch((err) => {
+        alert(err);
+      });
   };
+  // };
+
   return (
     <View style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.contentContainer}>
@@ -33,7 +58,7 @@ export default function LoginScreen() {
             <CustomInput
               placeholder={"Email Address"}
               value={email}
-              setValue={setEmail}
+              setValue={(newText) => setEmail(newText)}
               secureTextEntry={false}
             />
           </FormControl>
@@ -41,17 +66,14 @@ export default function LoginScreen() {
             <FormControl.Label>Password</FormControl.Label>
             <CustomInput
               placeholder={"Password"}
-              value={email}
-              setValue={setEmail}
+              value={password}
+              setValue={(newText) => setPassword(newText)}
               secureTextEntry={false}
             />
           </FormControl>
         </View>
         <View style={styles.btnWrapper}>
-          <CustomButton
-            text="Sign In"
-            onPress={() => console.log("Make Account")}
-          />
+          <CustomButton text="Sign In" onPress={onSignInPress} />
           <View style={styles.orTextWrapper}>
             <Text style={styles.descriptionText}>or sign up with</Text>
           </View>

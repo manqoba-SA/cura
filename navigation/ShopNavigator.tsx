@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ShopScreen from "../screens/shopScreens/ShopScreen";
 import CustomHeader from "../components/CustomHeader/CustomHeader";
 import ProductDetailScreen from "../screens/shopScreens/ProductDetailScreen";
-// import ShopScreen from "../screens/shopScreens/shopScreen";
 
 export default function ShopNavigator() {
   const Stack = createNativeStackNavigator();

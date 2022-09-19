@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 import { Dimensions, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppNavigator from "./navigation/AppNavigator";
 import AuthNavigator from "./navigation/AuthNavigator";
 import navigationTheme from "./navigation/navigationTheme";
@@ -31,10 +31,17 @@ import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 import { Lato_400Regular } from "@expo-google-fonts/lato";
 import { extendTheme, NativeBaseProvider } from "native-base";
+import { Provider, useSelector, useDispatch } from "react-redux";
+import { store } from "./redux/store";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase";
+import { login, logout, selectUser } from "./redux/features/userSlice";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   let [fontsLoaded] = useFonts({
     Poppins_100Thin,
     Poppins_100Thin_Italic,
@@ -78,15 +85,36 @@ export default function App() {
     //   initialColorMode: "dark",
     // },
   });
+
+  // check at page load if a user is authenticated
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        // user is logged in, send the user's details to redux, store the current user in the state
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   if (!fontsLoaded) {
     return null;
   } else {
     return (
-      <NativeBaseProvider theme={theme}>
-        <NavigationContainer theme={navigationTheme}>
-          {user ? <AppNavigator /> : <AuthNavigator />}
-        </NavigationContainer>
-      </NativeBaseProvider>
+      <Provider store={store}>
+        <NativeBaseProvider theme={theme}>
+          <NavigationContainer theme={navigationTheme}>
+            {user ? <AppNavigator /> : <AuthNavigator />}
+          </NavigationContainer>
+        </NativeBaseProvider>
+      </Provider>
     );
   }
 }
