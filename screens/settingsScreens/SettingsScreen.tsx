@@ -7,6 +7,9 @@ import {
 } from "@expo-google-fonts/poppins";
 import { ScrollView } from "native-base";
 import CustomButton from "../../components/CustomButtons/CustomButton";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/features/userSlice";
+import { auth } from "../../firebase/firebase";
 
 const Item = ({ title, description }) => {
   return (
@@ -39,31 +42,36 @@ const Item = ({ title, description }) => {
   );
 };
 
-export default class SettingsScreen extends Component {
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <View style={styles.firstWrap}>
-          <Text style={styles.categotyText}>Account Settings</Text>
-          <View style={styles.secondWrap}>
-            <Item title={"My Profile"} description="Edit Your Profile" />
-            <Item title={"Privacy and notification"} description="Legally" />
-            <Item title={"Language"} description="Change app language" />
-          </View>
-          <Text style={styles.categotyText}>Support</Text>
-          <View style={styles.secondWrap}>
-            <Item title={"Feedback"} description="Let’s hear from you" />
-            <Item title={"About curaHelth"} description="About Us" />
-            <Item title={"Rate curaHelth"} description="Rate our app" />
-          </View>
-          <CustomButton
-            text={"Log Out"}
-            onPress={() => console.log("Yoo logged Out")}
-          />
+export default function SettingsScreen({ navigation }) {
+  const dispatch = useDispatch();
+
+  const logoutOfApp = () => {
+    // dispatch to the store with the logout action
+    dispatch(logout());
+    // sign out function from firebase
+    auth.signOut();
+  };
+
+  // const user = useSelector(selectUser);
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.firstWrap}>
+        <Text style={styles.categotyText}>Account Settings</Text>
+        <View style={styles.secondWrap}>
+          <Item title={"My Profile"} description="Edit Your Profile" />
+          <Item title={"Privacy and notification"} description="Legally" />
+          <Item title={"Language"} description="Change app language" />
         </View>
-      </ScrollView>
-    );
-  }
+        <Text style={styles.categotyText}>Support</Text>
+        <View style={styles.secondWrap}>
+          <Item title={"Feedback"} description="Let’s hear from you" />
+          <Item title={"About curaHelth"} description="About Us" />
+          <Item title={"Rate curaHelth"} description="Rate our app" />
+        </View>
+        <CustomButton text={"Log Out"} onPress={logoutOfApp} />
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({

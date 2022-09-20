@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
 import AppNavigator from "./navigation/AppNavigator";
 import AuthNavigator from "./navigation/AuthNavigator";
@@ -28,20 +28,20 @@ import {
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
 import AppLoading from "expo-app-loading";
-import * as SplashScreen from "expo-splash-screen";
-import { Lato_400Regular } from "@expo-google-fonts/lato";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import { Provider, useSelector, useDispatch } from "react-redux";
 import { store } from "./redux/store";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
 import { login, logout, selectUser } from "./redux/features/userSlice";
+import * as Progress from "react-native-progress";
+import COLORS from "./constants/COLORS";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  // const [user, setUser] = useState(null);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const [isReady, setIsReady] = useState(false);
   let [fontsLoaded] = useFonts({
     Poppins_100Thin,
     Poppins_100Thin_Italic,
@@ -80,10 +80,6 @@ export default function App() {
         400: "#d97706",
       },
     },
-    // config: {
-    //   // Changing initialColorMode to 'dark'
-    //   initialColorMode: "dark",
-    // },
   });
 
   // check at page load if a user is authenticated
@@ -98,14 +94,24 @@ export default function App() {
             displayName: userAuth.displayName,
           })
         );
+        setIsReady(true);
       } else {
         dispatch(logout());
+        setIsReady(true);
       }
     });
   }, []);
 
-  if (!fontsLoaded) {
-    return null;
+  if (!fontsLoaded || !isReady) {
+    return (
+      <View style={styles.container}>
+        <Progress.Circle
+          thickness={5}
+          indeterminate={true}
+          color={COLORS.primary.text}
+        />
+      </View>
+    );
   } else {
     return (
       <Provider store={store}>
@@ -119,4 +125,10 @@ export default function App() {
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

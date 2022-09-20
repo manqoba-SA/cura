@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import COLORS from "../../constants/COLORS";
+import * as Progress from "react-native-progress";
 
 export default function CustomButton({
   onPress,
@@ -16,6 +17,7 @@ export default function CustomButton({
   bgColor,
   fgColor,
   disabled = false,
+  loading = false,
 }) {
   return (
     <TouchableOpacity
@@ -28,15 +30,21 @@ export default function CustomButton({
       ]}
       disabled={disabled}
     >
-      <Text
-        style={[
-          styles.text,
-          styles[`text_${type}`],
-          fgColor ? { color: fgColor } : {},
-        ]}
-      >
-        {text}
-      </Text>
+      {loading ? (
+        <View style={styles.loadingWrapper}>
+          <Progress.Circle thickness={5} indeterminate={true} color={"#fff"} />
+        </View>
+      ) : (
+        <Text
+          style={[
+            styles.text,
+            styles[`text_${type}`],
+            fgColor ? { color: fgColor } : {},
+          ]}
+        >
+          {text}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 }
@@ -67,5 +75,9 @@ const styles = StyleSheet.create({
   },
   text_tertiary: {
     color: COLORS.tertiary.text,
+  },
+  loadingWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

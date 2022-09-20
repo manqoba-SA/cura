@@ -1,9 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, CheckBox } from "react-native";
 import React, { useCallback, useState } from "react";
-import {
-  Poppins_400Regular,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
 import disc from "@jsamr/counter-style/presets/disc";
 import MarkedList from "@jsamr/react-native-li";
 import { Checkbox, KeyboardAvoidingView } from "native-base";
