@@ -1,16 +1,20 @@
-import { View, Text, StyleSheet, CheckBox } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React, { useCallback, useState } from "react";
 import disc from "@jsamr/counter-style/presets/disc";
 import MarkedList from "@jsamr/react-native-li";
-import { Checkbox, KeyboardAvoidingView } from "native-base";
 import CustomButton from "../../components/CustomButtons/CustomButton";
-import { useFocusEffect } from "@react-navigation/native";
-import { AvoidSoftInput } from "react-native-avoid-softinput";
+import { CheckBox, Separator } from "react-native-btr";
+import COLORS from "../../constants/COLORS";
 
 export default function TermsAndConditionsScreen({ navigation }) {
   const [groupValues, setGroupValues] = React.useState([]);
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
+  // const toggle = (index: number) => {
+  //   const item = data[index];
+  //   item.checked = !item.checked;
+  //   setGroupValues([...groupValues]);
+  // }
   const terms = [
     {
       id: 1,
@@ -49,33 +53,39 @@ export default function TermsAndConditionsScreen({ navigation }) {
           </MarkedList>
         </View>
         <View>
-          <Checkbox.Group
-            onChange={(v) => setGroupValues(v)}
-            value={groupValues}
-            accessibilityLabel="Check to continue"
-          >
-            <Checkbox value="one" my={2}>
-              <View>
-                <Text style={styles.darkText}>
-                  I agree to curaHealth’s Terms & Condition and confirm that I
-                  am at least 16 old.
-                </Text>
-              </View>
-            </Checkbox>
-            <Checkbox value="two">
+          <View style={styles.checkoutWrap}>
+            <CheckBox
+              checked={isSelected}
+              onPress={() => setSelection(!isSelected)}
+              color={COLORS.primary.text}
+            />
+            <View style={styles.checkoutText}>
               <Text style={styles.darkText}>
-                I consent to curaHealth using any personal health data I
-                voluntarily share....
+                I agree to curaHealth’s Terms & Condition and confirm that I am
+                at least 16 old.
               </Text>
-            </Checkbox>
-          </Checkbox.Group>
+            </View>
+          </View>
+          <View style={styles.checkoutWrap}>
+            <CheckBox
+              checked={isSelected2}
+              onPress={() => setSelection2(!isSelected2)}
+              color={COLORS.primary.text}
+            />
+            <View style={styles.checkoutText}>
+              <Text style={styles.darkText}>
+                I agree to curaHealth’s Terms & Condition and confirm that I am
+                at least 16 old.
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
       <View style={styles.btnWrapper}>
         <CustomButton
           text={"Continue"}
           onPress={() => navigation.navigate("Register")}
-          disabled={groupValues.length === 2 ? false : true}
+          disabled={isSelected && isSelected2 ? false : true}
           //   disabled={true}
         />
       </View>
@@ -111,5 +121,13 @@ const styles = StyleSheet.create({
   darkText: { fontSize: 15, fontFamily: "Poppins_400Regular" },
   listWrapper: {
     marginTop: 15,
+  },
+  checkoutWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  checkoutText: {
+    marginLeft: 15,
   },
 });
