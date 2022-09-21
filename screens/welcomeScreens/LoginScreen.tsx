@@ -12,21 +12,23 @@ import CustomButton from "../../components/CustomButtons/CustomButton";
 import CustomInput from "../../components/CustomInputs/CustomInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { AuthErrorCodes, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { login } from "../../redux/features/userSlice";
 import { useDispatch } from "react-redux";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import COLORS from "../../constants/COLORS";
 import * as Progress from "react-native-progress";
+import { InvalidEmailError } from "./LoginError";
 
-export default function LoginScreen({ navihation }) {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
   const onSignInPress = (e) => {
     e.preventDefault();
 
@@ -44,14 +46,14 @@ export default function LoginScreen({ navihation }) {
           })
         );
         setLoading(false);
-        navihation.navigate("home");
+        navigation.navigate("home");
       })
-      // display the error if any
-      .catch((error) => {
+      // display function(error)the error if any
+      .catch(function (error) {
         // alert(err);
-        setError(error.message);
+        // setError(error.message);
         setLoading(false);
-        console.log(error.message);
+        setError("Incorrect email or password");
       });
   };
   // };
@@ -98,7 +100,7 @@ export default function LoginScreen({ navihation }) {
                     placeholder={"Password"}
                     value={password}
                     setValue={(newText) => setPassword(newText)}
-                    secureTextEntry={false}
+                    secureTextEntry={true}
                   />
                 </FormControl>
                 <TouchableOpacity style={styles.forgotPasswordWrap}>

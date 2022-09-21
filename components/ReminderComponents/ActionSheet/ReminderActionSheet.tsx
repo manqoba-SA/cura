@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import { Actionsheet, Box, FormControl } from "native-base";
+import { Actionsheet, Box, FormControl, Select } from "native-base";
 import ReminderInputForm from "../Forms/ReminderInputForm";
 import ReminderSelectInput from "../Forms/ReminderSelectInput";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -45,40 +45,12 @@ export default function ReminderActionSheet({ isOpen, onClose }) {
               />
             </FormControl>
           </View>
-          <View style={{ marginHorizontal: 25, marginTop: 10 }}>
-            <FormControl w="100%">
-              <FormControl.Label>Dose Amount & Medicine Type</FormControl.Label>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: "100%",
-                }}
-              >
-                <ReminderInputForm
-                  type="dose"
-                  placeholder={"Dose Amount"}
-                  icon={
-                    <MaterialCommunityIcons
-                      name="pill"
-                      size={24}
-                      color="#9B9B9B"
-                    />
-                  }
-                />
-                <ReminderSelectInput
-                  medicineType={medicineType}
-                  onValueChange={(itemValue) => setMedicineType(itemValue)}
-                />
-              </View>
-            </FormControl>
-          </View>
           <View style={{ marginHorizontal: 25, marginTop: 10 }}>
             <FormControl w="100%">
               <FormControl.Label>
                 For How Long You Gonna Take?
               </FormControl.Label>
-
               <View
                 style={{
                   flexDirection: "row",
@@ -86,20 +58,16 @@ export default function ReminderActionSheet({ isOpen, onClose }) {
                   // paddingHorizontal: 10,
                 }}
               >
-                <ReminderInputForm
-                  type="dose"
-                  placeholder={"How Long"}
-                  icon={
-                    <FontAwesome5
-                      name="business-time"
-                      size={24}
-                      color="#9B9B9B"
-                    />
-                  }
+                <ReminderSelectInput
+                  medicineType={medicineType}
+                  onValueChange={(itemValue) => setMedicineType(itemValue)}
+                  type="first"
+                  placeholder={"eg. 2"}
                 />
                 <ReminderSelectInput
                   medicineType={medicineType}
                   onValueChange={(itemValue) => setMedicineType(itemValue)}
+                  placeholder={"eg. dose/pill"}
                 />
               </View>
             </FormControl>

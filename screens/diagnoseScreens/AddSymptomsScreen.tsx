@@ -12,13 +12,55 @@ import locationSymptoms from "../../constants/dummyData/locationSymptoms";
 import { AntDesign } from "@expo/vector-icons";
 const { width, height } = Dimensions.get("window");
 export default function AddSymptomsScreen({ navigation }) {
+  const [symptoms, setSymptoms] = React.useState(locationSymptoms);
+  const [selectedSymptoms, setSelectedSymptoms] = React.useState([]);
+  const [selectedLocation, setSelectedLocation] = React.useState("");
+  const [selectedLocationSymptoms, setSelectedLocationSymptoms] =
+    React.useState();
+
+  const onAdd = (item) => {
+    setSelectedSymptoms([...selectedSymptoms, item]);
+    // symptoms.map((location) => {
+    //   if (location === item) {
+    // symptoms.map((location) => {
+    setSymptoms(symptoms.filter((element) => element !== item?.id));
+    // });
+    //   }
+    // });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.textHeader}>Symptoms</Text>
         <Text style={styles.lighterText}>Please specify your symptoms</Text>
         <View style={styles.sysmptomsBox}>
-          <Text>nnjjn</Text>
+          <View style={styles.sysmptomsLocationTags}>
+            <View style={styles.sysmptomsLocationTagsWrap}>
+              {selectedSymptoms.map((symptom) => (
+                <TouchableOpacity
+                  style={[
+                    styles.addBtn,
+                    styles.symptomsBtns,
+                    { backgroundColor: COLORS.primary.text },
+                  ]}
+                >
+                  <View style={styles.dFlex}>
+                    {/* <AntDesign name="plus" size={15} color="#2266EA" /> */}
+                    <Text style={[styles.btnText, { color: "#fff" }]}>
+                      {symptom.title}
+                    </Text>
+                    <AntDesign
+                      style={{ marginLeft: 10 }}
+                      name="close"
+                      size={17}
+                      color="#fff"
+                    />
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
         </View>
         <View style={styles.addBtnWrap}>
           <TouchableOpacity style={styles.addBtn}>
@@ -31,8 +73,11 @@ export default function AddSymptomsScreen({ navigation }) {
         <View style={styles.sysmptomsLocationTags}>
           <Text style={styles.lighterText}>Most common in your location</Text>
           <View style={styles.sysmptomsLocationTagsWrap}>
-            {locationSymptoms.map((symptom) => (
-              <TouchableOpacity style={[styles.addBtn, styles.symptomsBtns]}>
+            {symptoms.map((symptom) => (
+              <TouchableOpacity
+                style={[styles.addBtn, styles.symptomsBtns]}
+                onPress={() => onAdd(symptom)}
+              >
                 <View style={styles.dFlex}>
                   <AntDesign name="plus" size={15} color="#2266EA" />
                   <Text style={styles.btnText}>{symptom.title}</Text>

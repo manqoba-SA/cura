@@ -4,6 +4,7 @@ import SlidesScreen from "../screens/SlidesScreen";
 import LoginScreen from "../screens/welcomeScreens/LoginScreen";
 import RegisterScreen from "../screens/welcomeScreens/RegisterScreen";
 import TermsAndConditionsScreen from "../screens/welcomeScreens/TermsAndConditionsScreen";
+import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScreen";
 
 export default function AuthNavigator() {
   const Stack = createNativeStackNavigator();
@@ -45,6 +46,10 @@ export default function AuthNavigator() {
           },
         }}
         component={RegisterScreen}
+      />
+      <Stack.Screen
+        name="RegisterWelcomeScreen"
+        component={RegisterWelcomeScreen}
       />
     </Stack.Navigator>
   );

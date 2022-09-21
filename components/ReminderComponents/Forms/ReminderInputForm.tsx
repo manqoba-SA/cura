@@ -13,12 +13,13 @@ export default function ReminderInputForm({
       w={type === "dose" ? "50%" : null}
       textAlign={type === "dose" ? "center" : null}
       bgColor={"tertiary.50"}
-      borderRadius={14}
-      paddingY={10}
-      borderWidth={0}
+      borderRadius={13}
+      paddingY={5}
+      borderWidth={0.5}
+      borderColor="primary.50"
       size="lg"
       placeholder={placeholder}
-      InputLeftElement={<Icon as={icon} size={6} ml="5" color="muted.400" />}
+      InputLeftElement={<Icon as={icon} size={4} ml="2" color="muted.400" />}
     />
   );
 }

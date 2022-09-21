@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     right: 15,
     left: 15,
     position: "absolute",
-    bottom: 15,
+    bottom: 25,
   },
   darkText: { fontSize: 15, fontFamily: "Poppins_400Regular" },
   listWrapper: {

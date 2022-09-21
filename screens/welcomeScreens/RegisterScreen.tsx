@@ -12,8 +12,9 @@ import { login } from "../../redux/features/userSlice";
 import { FirebaseError } from "firebase/app";
 import COLORS from "../../constants/COLORS";
 import * as Progress from "react-native-progress";
+import navigationTheme from "../../navigation/navigationTheme";
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -40,6 +41,7 @@ export default function RegisterScreen() {
             })
           );
           setLoading(false);
+          navigation.navigate("RegisterWelcomeScreen");
         })
         .catch((error) => {
           // FirebaseError
@@ -53,8 +55,7 @@ export default function RegisterScreen() {
       <View style={styles.contentContainer}>
         <Text style={styles.headerText}>Create your account</Text>
         <Text style={styles.descriptionText}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          Register an account to access best digital health services
         </Text>
         <View style={styles.formsWrapper}>
           {loading ? (
@@ -88,7 +89,7 @@ export default function RegisterScreen() {
                   placeholder={"Password"}
                   value={password}
                   setValue={(newText) => setPassword(newText)}
-                  secureTextEntry={false}
+                  secureTextEntry={true}
                 />
               </FormControl>
               <FormControl w="100%">
@@ -97,7 +98,7 @@ export default function RegisterScreen() {
                   placeholder={"Confirm Password"}
                   value={password2}
                   setValue={(newText) => setPassword2(newText)}
-                  secureTextEntry={false}
+                  secureTextEntry={true}
                 />
               </FormControl>
               {error ? (
