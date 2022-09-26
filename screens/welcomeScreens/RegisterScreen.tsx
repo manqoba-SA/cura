@@ -13,6 +13,7 @@ import { FirebaseError } from "firebase/app";
 import COLORS from "../../constants/COLORS";
 import * as Progress from "react-native-progress";
 import navigationTheme from "../../navigation/navigationTheme";
+import { mapAuthCodeToMessage } from "./authFunctions/firebaseAuthMessages";
 
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -44,8 +45,8 @@ export default function RegisterScreen({ navigation }) {
           navigation.navigate("RegisterWelcomeScreen");
         })
         .catch((error) => {
-          // FirebaseError
-          setError(error.message);
+          let errorMessage = mapAuthCodeToMessage(error.code);
+          setError(errorMessage);
           setLoading(false);
         });
     }

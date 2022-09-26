@@ -20,6 +20,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import COLORS from "../../constants/COLORS";
 import * as Progress from "react-native-progress";
 import { InvalidEmailError } from "./LoginError";
+import { mapAuthCodeToMessage } from "./authFunctions/firebaseAuthMessages";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -50,13 +51,11 @@ export default function LoginScreen({ navigation }) {
       })
       // display function(error)the error if any
       .catch(function (error) {
-        // alert(err);
-        // setError(error.message);
+        let errorMessage = mapAuthCodeToMessage(error.code);
+        setError(errorMessage);
         setLoading(false);
-        setError("Incorrect email or password");
       });
   };
-  // };
 
   return (
     <>
@@ -65,8 +64,7 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.contentContainer}>
           <Text style={styles.headerText}>Log In Your Account</Text>
           <Text style={styles.descriptionText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            Log in to access best digital health services.
           </Text>
           <View style={styles.formsWrapper}>
             {loading ? (
