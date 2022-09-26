@@ -21,6 +21,7 @@ import COLORS from "../../constants/COLORS";
 import * as Progress from "react-native-progress";
 import { InvalidEmailError } from "./LoginError";
 import { mapAuthCodeToMessage } from "./authFunctions/firebaseAuthMessages";
+import KeyboardAvoidingWrapper from "../../components/common/KeyboardAvoidingWrapper";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -60,83 +61,87 @@ export default function LoginScreen({ navigation }) {
   return (
     <>
       <View style={styles.container} showsVerticalScrollIndicator={false}>
-        {/* <KeyboardAwareScrollView> */}
-        <View style={styles.contentContainer}>
-          <Text style={styles.headerText}>Log In Your Account</Text>
-          <Text style={styles.descriptionText}>
-            Log in to access best digital health services.
-          </Text>
-          <View style={styles.formsWrapper}>
-            {loading ? (
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flex: 1.0,
-                }}
-              >
-                <Progress.Circle
-                  thickness={5}
-                  indeterminate={true}
-                  color={COLORS.primary.text}
-                />
-              </View>
-            ) : (
-              <View>
-                <FormControl w="100%">
-                  <FormControl.Label>Email Address</FormControl.Label>
-                  <CustomInput
-                    placeholder={"Email Address"}
-                    value={email}
-                    setValue={(newText) => setEmail(newText)}
-                    secureTextEntry={false}
+        <KeyboardAvoidingWrapper>
+          <View style={styles.contentContainer}>
+            <Text style={styles.headerText}>Log In Your Account</Text>
+            <Text style={styles.descriptionText}>
+              Log in to access best digital health services.
+            </Text>
+            <View style={styles.formsWrapper}>
+              {loading ? (
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flex: 1.0,
+                  }}
+                >
+                  <Progress.Circle
+                    thickness={5}
+                    indeterminate={true}
+                    color={COLORS.primary.text}
                   />
-                </FormControl>
-                <FormControl w="100%">
-                  <FormControl.Label>Password</FormControl.Label>
-                  <CustomInput
-                    placeholder={"Password"}
-                    value={password}
-                    setValue={(newText) => setPassword(newText)}
-                    secureTextEntry={true}
-                  />
-                </FormControl>
-                <TouchableOpacity style={styles.forgotPasswordWrap}>
-                  <Text style={styles.forgotPasswordText}>
-                    I forgot my password
-                  </Text>
-                </TouchableOpacity>
-                {error ? (
-                  <View style={styles.errorTextWrap}>
-                    <Text style={styles.errorText}>{error}</Text>
-                  </View>
-                ) : null}
-              </View>
-            )}
+                </View>
+              ) : (
+                <View>
+                  <FormControl w="100%">
+                    <FormControl.Label>Email Address</FormControl.Label>
+                    <CustomInput
+                      placeholder={"Email Address"}
+                      value={email}
+                      setValue={(newText) => setEmail(newText)}
+                      secureTextEntry={false}
+                    />
+                  </FormControl>
+                  <FormControl w="100%">
+                    <FormControl.Label>Password</FormControl.Label>
+                    <CustomInput
+                      placeholder={"Password"}
+                      value={password}
+                      setValue={(newText) => setPassword(newText)}
+                      secureTextEntry={true}
+                    />
+                  </FormControl>
+                  <TouchableOpacity
+                    style={styles.forgotPasswordWrap}
+                    onPress={() => navigation.navigate("ForgotPasswordScreen")}
+                  >
+                    <Text style={styles.forgotPasswordText}>
+                      I forgot my password
+                    </Text>
+                  </TouchableOpacity>
+                  {error ? (
+                    <View style={styles.errorTextWrap}>
+                      <Text style={styles.errorText}>{error}</Text>
+                    </View>
+                  ) : null}
+                </View>
+              )}
 
-            <View style={styles.btnWrapper}>
-              <CustomButton
-                text="Sign In"
-                onPress={onSignInPress}
-                disabled={loading}
-              />
-              <View style={styles.orTextWrapper}>
-                <Text style={styles.descriptionText}>or sign up with</Text>
-              </View>
-              <View style={styles.socialsWrapper}>
-                <TouchableOpacity style={styles.socialIcon}>
-                  <MaterialIcons name="facebook" size={34} color="#18ACFE" />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.socialIcon}>
-                  <AntDesign name="apple1" size={30} color="#283544" />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.socialIcon}>
-                  <AntDesign name="google" size={30} color="#EB4335" />
-                </TouchableOpacity>
+              <View style={styles.btnWrapper}>
+                <CustomButton
+                  text="Sign In"
+                  onPress={onSignInPress}
+                  disabled={loading}
+                />
+                <View style={styles.orTextWrapper}>
+                  <Text style={styles.descriptionText}>or sign up with</Text>
+                </View>
+                <View style={styles.socialsWrapper}>
+                  <TouchableOpacity style={styles.socialIcon}>
+                    <MaterialIcons name="facebook" size={34} color="#18ACFE" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.socialIcon}>
+                    <AntDesign name="apple1" size={30} color="#283544" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.socialIcon}>
+                    <AntDesign name="google" size={30} color="#EB4335" />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
-        </View>
+        </KeyboardAvoidingWrapper>
       </View>
     </>
   );

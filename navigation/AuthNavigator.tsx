@@ -5,6 +5,7 @@ import LoginScreen from "../screens/welcomeScreens/LoginScreen";
 import RegisterScreen from "../screens/welcomeScreens/RegisterScreen";
 import TermsAndConditionsScreen from "../screens/welcomeScreens/TermsAndConditionsScreen";
 import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScreen";
+import ForgotPassword from "../screens/welcomeScreens/ForgotPassword";
 
 export default function AuthNavigator() {
   const Stack = createNativeStackNavigator();
@@ -50,6 +51,18 @@ export default function AuthNavigator() {
       <Stack.Screen
         name="RegisterWelcomeScreen"
         component={RegisterWelcomeScreen}
+      />
+      <Stack.Screen
+        name="ForgotPasswordScreen"
+        options={{
+          headerShown: true,
+          title: "",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
+        component={ForgotPassword}
       />
     </Stack.Navigator>
   );
