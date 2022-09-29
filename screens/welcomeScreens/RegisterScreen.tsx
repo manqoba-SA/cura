@@ -6,7 +6,7 @@ import CustomInput from "../../components/CustomInputs/CustomInput";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { auth, firestore } from "../../firebase/firebase";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/features/userSlice";
 import { FirebaseError } from "firebase/app";
@@ -15,6 +15,14 @@ import * as Progress from "react-native-progress";
 import navigationTheme from "../../navigation/navigationTheme";
 import { mapAuthCodeToMessage } from "./authFunctions/firebaseAuthMessages";
 import KeyboardAvoidingWrapper from "../../components/common/KeyboardAvoidingWrapper";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -24,7 +32,7 @@ export default function RegisterScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
 
     setLoading(true);
@@ -34,7 +42,15 @@ export default function RegisterScreen({ navigation }) {
     } else {
       // Create a new user with Firebase
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userAuth) => {
+        .then(async (userAuth) => {
+          const userRef = doc(firestore, "users", userAuth.user.uid);
+          await setDoc(userRef, {
+            firstName: "",
+            lastName: "",
+            email: email,
+            age: 0,
+            userType: "patient",
+          });
           // Dispatch the user information for persistence in the redux state
           dispatch(
             login({

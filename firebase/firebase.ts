@@ -7,6 +7,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
+import "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLF3L1Y5Mb0mVoqPutS__PoS7ItovuG7A",
@@ -18,10 +20,14 @@ const firebaseConfig = {
   measurementId: "G-WDZNLVR18B",
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 //init services
 const auth = getAuth();
+export const firestore = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+});
+// export const storage = storage();
 
 export {
   auth,

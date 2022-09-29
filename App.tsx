@@ -27,7 +27,6 @@ import {
   Poppins_900Black,
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import { Provider, useSelector, useDispatch } from "react-redux";
 import { store } from "./redux/store";

@@ -1,65 +1,53 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import HomeNavigator from "./HomeNavigator";
-import MedicineReminderNavigator from "./MedicineReminderNavigator";
-import HealthLibraryNavigator from "./HealthLibraryNavigator";
-import ShopNavigator from "./ShopNavigator";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TabsNavigator from "./TabsNavigator";
+import { useSelector } from "react-redux";
+import { firestore } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScreen";
+import Loading from "../components/common/Loading";
 
 interface TabBarIconProps {
   color: string;
   size: number;
 }
 
-const Tab = createBottomTabNavigator();
-
 export default function AppNavigator() {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarLabelStyle: { fontFamily: "Poppins_400Regular" },
-      }}
-    >
-      <Tab.Screen
-        component={HomeNavigator}
-        name="Home"
-        options={{
-          tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <AntDesign color={color} name="home" size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        component={MedicineReminderNavigator}
-        name="Reminder"
-        options={{
-          tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <Ionicons name="alarm-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        component={HealthLibraryNavigator}
-        name="Library"
-        options={{
-          tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <Ionicons name="md-library-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        component={ShopNavigator}
-        name="Shop"
-        options={{
-          tabBarIcon: ({ color, size }: TabBarIconProps) => (
-            <Feather name="shopping-bag" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
+  const Stack = createNativeStackNavigator();
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const currentUser = useSelector((state: any) => state.user);
+  const getUserdetails = async () => {
+    const docRef = doc(firestore, "users", currentUser.user.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setUser(docSnap.data());
+      setLoading(false);
+    } else {
+      console.log("No such document!");
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getUserdetails();
+  }, []);
+  if (loading) {
+    return <Loading />;
+  } else {
+    return (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {user?.firstName === "" &&
+        user?.lastName === "" &&
+        user?.age === 0 &&
+        !user?.gender ? (
+          <Stack.Screen
+            component={RegisterWelcomeScreen}
+            name="RegisterWelcomeScreen"
+          />
+        ) : (
+          <Stack.Screen name="tabs" component={TabsNavigator} />
+        )}
+      </Stack.Navigator>
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/homeScreens.jsx/Home";
 // import Settings from "../screens/SettingsScreen";
@@ -24,9 +24,31 @@ import CauseScreen from "../screens/diagnoseScreens/resultsScreens/CauseScreen";
 import RemedyDetailScreen from "../screens/diagnoseScreens/resultsScreens/homeRemedyScreens/RemedyDetailScreen";
 import DoctorDetailsScreen from "../screens/diagnoseScreens/resultsScreens/doctorScreens/DoctorDetailsScreen";
 import HerbDetailsScreen from "../screens/diagnoseScreens/resultsScreens/herbsScreens/HerbDetailsScreen";
+import { firestore } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { getAuth } from "firebase/auth";
+import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScreen";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
+  // const [isReady, setIsReady] = React.useState(false);
+
+  // const [userDetails, setUserDetails] = React.useState<any>(null);
+  // const user = useSelector((state: any) => state.user);
+  // useEffect(() => {
+  //   // const getUser = async () => {
+  //   const noteSnapshot = getDoc(doc(firestore, "users", user.uid));
+  //   // if (noteSnapshot.exists()) {
+  //   setUserDetails(noteSnapshot.data());
+  //   console.log("userDetails", noteSnapshot);
+  //   // } else {
+  //   //   console.log("Note doesn't exist");
+  //   // }
+  //   // };
+  //   // getUser();
+  // }, []);
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
