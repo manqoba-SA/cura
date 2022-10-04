@@ -21,8 +21,8 @@ export default function ShopScreen({ navigation }) {
 
       <View style={styles.content}>
         <View style={styles.productsWrapper}>
-          {products.map((product) => (
-            <View style={{ width: "45%" }}>
+          {products.map((product, index) => (
+            <View key={index} style={{ width: "45%" }}>
               <TouchableOpacity
                 key={product.id}
                 style={styles.box}

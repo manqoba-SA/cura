@@ -8,7 +8,6 @@ import {
 import React, { useState } from "react";
 import { Actionsheet, Box } from "native-base";
 import CustomSearchBar from "../../CustomSearchBar/CustomSearchBar";
-import symptoms from "./allSymptoms";
 import {
   Poppins_400Regular,
   Poppins_600SemiBold,
@@ -16,7 +15,7 @@ import {
 import COLORS from "../../../constants/COLORS";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function SymptomsCall({ isOpen, onClose }) {
+export default function SymptomsCall({ isOpen, onClose, symptoms, onAdd }) {
   const [search, setSearch] = useState("");
   const [clicked, setClicked] = useState(false);
 
@@ -43,7 +42,7 @@ export default function SymptomsCall({ isOpen, onClose }) {
                 {symptom.description}
               </Text>
 
-              <TouchableOpacity style={styles.addBtn}>
+              <TouchableOpacity style={styles.addBtn} onPress={onAdd(symptom)}>
                 <AntDesign name="plus" size={15} color="#2266EA" />
                 <Text
                   style={{
