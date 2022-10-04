@@ -6,6 +6,8 @@ import { firestore } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScreen";
 import Loading from "../components/common/Loading";
+import SettingsScreen from "../screens/settingsScreens/SettingsScreen";
+import SettingsNavigator from "./SettingsNavigator";
 
 interface TabBarIconProps {
   color: string;
@@ -44,9 +46,9 @@ export default function AppNavigator() {
             component={RegisterWelcomeScreen}
             name="RegisterWelcomeScreen"
           />
-        ) : (
-          <Stack.Screen name="tabs" component={TabsNavigator} />
-        )}
+        ) : null}
+        <Stack.Screen name="tabs" component={TabsNavigator} />
+        <Stack.Screen component={SettingsNavigator} name="settingsNavigator" />
       </Stack.Navigator>
     );
   }

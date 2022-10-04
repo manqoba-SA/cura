@@ -51,14 +51,18 @@ export default function Home({ navigation }) {
         />
         <View style={styles.healthLibraryAndReminderBoxWrap}>
           <CustomBox
-            onPress={() => navigation.navigate("healthLibrary")}
+            onPress={() =>
+              navigation.navigate("Library", { screen: "healthLibrary" })
+            }
             title={"Health\nLibrary"}
             type="half"
             subtitle={""}
             image={images.healthLibrary}
           />
           <CustomBox
-            onPress={() => navigation.navigate("reminder")}
+            onPress={() =>
+              navigation.navigate("Reminder", { screen: "reminder" })
+            }
             title={"Medicine\nReminder"}
             type="half"
             subtitle={""}

@@ -32,23 +32,6 @@ import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScre
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
-  // const [isReady, setIsReady] = React.useState(false);
-
-  // const [userDetails, setUserDetails] = React.useState<any>(null);
-  // const user = useSelector((state: any) => state.user);
-  // useEffect(() => {
-  //   // const getUser = async () => {
-  //   const noteSnapshot = getDoc(doc(firestore, "users", user.uid));
-  //   // if (noteSnapshot.exists()) {
-  //   setUserDetails(noteSnapshot.data());
-  //   console.log("userDetails", noteSnapshot);
-  //   // } else {
-  //   //   console.log("Note doesn't exist");
-  //   // }
-  //   // };
-  //   // getUser();
-  // }, []);
-
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
@@ -207,22 +190,7 @@ export default function HomeNavigator() {
         }}
         name="DoctorDetailsScreen"
       />
-      <Stack.Screen
-        component={SettingsScreen}
-        name="settings"
-        options={{
-          headerShown: true,
-          header: (props) => (
-            <CustomHeader
-              navigation={""}
-              type="library"
-              title={"Settings"}
-              {...props}
-            />
-          ),
-        }}
-      />
-      <Stack.Screen component={HealthLibraryScreen} name="healthLibrary" />
+
       <Stack.Screen
         component={ArticlesScreen}
         options={({ route }) => ({

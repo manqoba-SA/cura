@@ -10,6 +10,8 @@ import CustomButton from "../../components/CustomButtons/CustomButton";
 import COLORS from "../../constants/COLORS";
 import locationSymptoms from "../../constants/dummyData/locationSymptoms";
 import { AntDesign } from "@expo/vector-icons";
+import SymptomsCall from "../../components/DiagnosisComponents/Assessment/SymptomsCall";
+import { useDisclose } from "native-base";
 const { width, height } = Dimensions.get("window");
 export default function AddSymptomsScreen({ navigation }) {
   const [symptoms, setSymptoms] = React.useState(locationSymptoms);
@@ -17,6 +19,8 @@ export default function AddSymptomsScreen({ navigation }) {
   const [selectedLocation, setSelectedLocation] = React.useState("");
   const [selectedLocationSymptoms, setSelectedLocationSymptoms] =
     React.useState();
+
+  const { isOpen, onOpen, onClose } = useDisclose();
 
   const onAdd = (item) => {
     setSelectedSymptoms([...selectedSymptoms, item]);
@@ -63,7 +67,7 @@ export default function AddSymptomsScreen({ navigation }) {
           </View>
         </View>
         <View style={styles.addBtnWrap}>
-          <TouchableOpacity style={styles.addBtn}>
+          <TouchableOpacity onPress={onOpen} style={styles.addBtn}>
             <View style={styles.dFlex}>
               <AntDesign name="plus" size={20} color="#409849" />
               <Text style={styles.btnText}>Add Symptoms</Text>
@@ -93,6 +97,7 @@ export default function AddSymptomsScreen({ navigation }) {
           onPress={() => navigation.navigate("AssessmentScreen")}
         />
       </View>
+      <SymptomsCall isOpen={isOpen} onClose={onClose} />
     </View>
   );
 }

@@ -14,7 +14,7 @@ import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import RegisterSuccess from "../../components/FirstScreens/RegisterSuccess";
 
-export default function RegisterWelcomeScreen() {
+export default function RegisterWelcomeScreen({ navigation }) {
   const welcomeImage = require("../../assets/images/illustrations/welcome.png");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -65,7 +65,12 @@ export default function RegisterWelcomeScreen() {
   };
 
   if (showSuccess) {
-    return <RegisterSuccess />;
+    return (
+      <RegisterSuccess
+        firstName={firstName}
+        onPress={() => navigation.navigate("tabs")}
+      />
+    );
   } else
     return (
       <View style={styles.container}>
@@ -119,7 +124,7 @@ export default function RegisterWelcomeScreen() {
                         <Slider
                           value={age}
                           minimumValue={18}
-                          maximumValue={100}
+                          maximumValue={118}
                           step={1}
                           minimumTrackTintColor={COLORS.primary.text}
                           onValueChange={(value) => setAge(value)}

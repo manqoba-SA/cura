@@ -63,7 +63,11 @@ export default function CustomHeader({ navigation, title, type = "default" }) {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("settings")}
+                    onPress={() =>
+                      navigation.navigate("settingsNavigator", {
+                        screen: "settings",
+                      })
+                    }
                     style={{ marginRight: 15 }}
                   >
                     <MaterialIcons
@@ -73,14 +77,22 @@ export default function CustomHeader({ navigation, title, type = "default" }) {
                     />
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("settings")}
+                    onPress={() =>
+                      navigation.navigate("settingsNavigator", {
+                        screen: "settings",
+                      })
+                    }
                   >
                     <AntDesign name="shoppingcart" size={30} color="#409849" />
                   </TouchableOpacity>
                 </View>
               ) : (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("settings")}
+                  onPress={() =>
+                    navigation.navigate("settingsNavigator", {
+                      screen: "settings",
+                    })
+                  }
                 >
                   <Ionicons name="settings-outline" size={35} color="#A1A3AB" />
                 </TouchableOpacity>
