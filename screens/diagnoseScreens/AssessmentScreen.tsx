@@ -185,23 +185,16 @@ export default function AssessmentScreen({ navigation, route }) {
     selectedSymptoms.forEach((symptom) => {
       symptomsQuestions.forEach((symptomQuestion) => {
         if (symptomQuestion[symptom.title]) {
-          // selectedSymptomsQuestions.push(
-          //   symptomQuestion[symptom.title].questions
-          // );
           selectedSymptomsQuestions = [
             ...selectedSymptomsQuestions,
             ...symptomQuestion[symptom.title].questions,
           ];
-          // console.log(symptomQuestion[symptom.title].questions);
-          // symptomsQuestions[0][symptom].questions[index].question
         }
       });
     });
     setSelectedSymptomsQuestions(selectedSymptomsQuestions);
     setLoading(false);
   }, []);
-
-  // console.log(selectedSymptomsQuestions[index]?.question);
 
   const [selectedSymptomsAnswers, setSelectedSymptomsAnswers] = React.useState(
     []
@@ -218,25 +211,24 @@ export default function AssessmentScreen({ navigation, route }) {
             <TouchableOpacity
               key={i}
               onPress={() => {
-                // setSelectedSymptomsAnswers([
-                //   ...selectedSymptomsAnswers,
-                //   option.symptom,
-                // ]);
                 if (index + 1 >= selectedSymptomsQuestions.length) {
-                  // if (option.symptom) {
-                  //   setSelectedSymptomsAnswers([
-                  //     ...selectedSymptomsAnswers,
-                  //     option.symptom,
-                  //   ]);
-                  // }
-                  navigation.navigate("SymptomsResult");
+                  if (option.symptom) {
+                    setSelectedSymptomsAnswers([
+                      ...selectedSymptomsAnswers,
+                      option.symptom,
+                    ]);
+                  }
+                  navigation.navigate("SicknessesAssessment", {
+                    selectedSymptomsAnswers,
+                    index: 0,
+                  });
                 } else {
-                  // if (option.symptom) {
-                  //   setSelectedSymptomsAnswers([
-                  //     ...selectedSymptomsAnswers,
-                  //     option.symptom,
-                  //   ]);
-                  // }
+                  if (option.symptom) {
+                    setSelectedSymptomsAnswers([
+                      ...selectedSymptomsAnswers,
+                      option.symptom,
+                    ]);
+                  }
                   navigation.navigate("AssessmentScreen", {
                     index: index + 1,
                     selectedSymptoms,

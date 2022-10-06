@@ -29,6 +29,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { getAuth } from "firebase/auth";
 import RegisterWelcomeScreen from "../screens/welcomeScreens/RegisterWelcomeScreen";
+import SicknessesAssessment from "../screens/diagnoseScreens/SicknessesAssessment";
 
 export default function HomeNavigator() {
   const Stack = createNativeStackNavigator();
@@ -103,6 +104,10 @@ export default function HomeNavigator() {
           },
         }}
         name="AssessmentScreen"
+      />
+      <Stack.Screen
+        component={SicknessesAssessment}
+        name="SicknessesAssessment"
       />
       <Stack.Screen component={NoticeScreen} name="NoticeScreen" />
       <Stack.Screen component={ReportScreen} name="ReportScreen" />
