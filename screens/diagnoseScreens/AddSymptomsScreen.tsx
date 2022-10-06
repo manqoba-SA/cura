@@ -37,6 +37,7 @@ export default function AddSymptomsScreen({ navigation }) {
   const finalizeSymptoms = () => {
     navigation.navigate("AssessmentScreen", {
       selectedSymptoms,
+      index: 0,
     });
   };
 
